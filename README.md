@@ -33,7 +33,8 @@ Thank you for your time,
 
 > Hi Peter,
 >
-> Thank you for your email. 
+> Thank you for your email.
+> 
 > I'd be happy to correspond with you on OO and East as long as you are ok with me responding when I can - pretty busy right now.
 
 > My first rule of Object Oriented Design is to concentrate on behaviour and not on the state (fields/variables) inside Objects.

@@ -11,7 +11,7 @@ this project and discussion is of use to you.
 More information on the East Oriented approach can be found [here](http://jamesladdcode.com/?p=12)
 as well as various other places on the [internet](https://www.google.com.au/search?q=save+google+search&oq=save+google+search#q=East+Oriented+code). 
 
-*note:* some of the discource that follows not directly related to the program and programming
+**note:** some of the discource that follows not directly related to the program and programming
 tehniques has been elided.
 
 The Discourse
@@ -32,12 +32,12 @@ I was hoping maybe we could talk a bit about my issue. Maybe you could point me 
 Thank you for your time,
 
 > Hi Peter,
+>
 > Thank you for your email. 
 > I'd be happy to correspond with you on OO and East as long as you are ok with me responding when I can - pretty busy right now.
 
 > My first rule of Object Oriented Design is to concentrate on behaviour and not on the state (fields/variables) inside Objects.
 > These fields and state fall out from defining the behaviour.
 
->What is your starting point - the Chess Board?
-
+> What is your starting point - the Chess Board?
 

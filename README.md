@@ -42,3 +42,32 @@ I was hoping maybe we could talk a bit about my issue. Maybe you could point me 
 
 > What is your starting point - the Chess Board?
 
+All of my research has brought me to that same conclusion. The thing that separates OO from procedural programming is the focus on behavior between modules rather than state. I've adopted this mentality, but I can't seem to correctly use it.
+
+My starting point is actually piece movement. The goal is when a user selects a square on the board the available moves from that square are shown to the user. I started with pawn movement.
+
+> So the behaviour you want from the Game is for the Board to reveal the available moves for an Occupied Square to the Player. 
+> The thing with the information is the Game, and Player can't be shown directly but indirectly via an Output mechanism which could be the command line or GUI.
+> This disconnect between the input and output mechanism will influence the design which should be independent of it. For example:
+>
+> game showMovesForSquare: square On: output
+>
+> Notice how the names of the domain (Chess Game) are coming through, this helps focus and separates the what from the how.
+>
+> Thoughts?
+
+I'm most comfortable with Java or C#. I've been writing this project with Java.
+
+Your analysis is spot on. Your showMovesForSquare:On: message makes perfect sense to me. I know just enough Smalltalk syntax to understand it!
+
+I agree that the output (the place where the game should send the moves) should be passed into the game, but how do you tell when it should be an argument to the message as opposed to the constructor?
+
+I'm curious to see how we would implement this.
+
+> I try to construct my objects w valid state and then not change it, so in this case you can pass the board and the output to the constructor, then 
+> Game has the showMovesFor(Square selectedSquare) method (changed to Java code examples).
+> I would have this delegate to a private method showMovesForOn(square, output)
+> because I like to have dependencies for methods be obvious. This approach doesn't take much longer and it helps later w testing and expanding abilities.
+
+
+

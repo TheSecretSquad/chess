@@ -19,7 +19,7 @@ The Discourse
 
 Hello Mr. Ladd,
 
-My name is Peter DiSalvo. I'm a non-professional programmer from New York. I'm wondering if you could spare some time to help me with an object-oriented programming problem.
+...
 
 I found your "East Oriented Code" technique while researching the concept of "Tell, Don't Ask". It's a brilliant clarification of "Tell, Don't Ask" and I'm glad to have found it. However, I'm still having trouble applying the concepts.
 

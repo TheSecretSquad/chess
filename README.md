@@ -29,9 +29,9 @@ After months of experimentation, and reading many books and blogs, I've managed 
 
 I was hoping maybe we could talk a bit about my issue. Maybe you could point me in the right direction. I would greatly appreciate any time you could spare.
 
-Thank you for your time,
+...,
 
-> Hi Peter,
+> ...
 >
 > Thank you for your email.
 > 

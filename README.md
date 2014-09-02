@@ -104,3 +104,11 @@ Square I thought would be an immutable value type, so I didn't think to make an 
 
 > Yes - square could be an enum :)
 
+You're thinking just make an enum with 64 squares?
+
+> Yes, an enum with 64 values.
+>
+> You might want to provide a constructor that takes a row and column but converts to single value.
+> This should be ok for now.
+
+

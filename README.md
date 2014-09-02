@@ -97,3 +97,10 @@ Any thoughts?
 >
 > Btw - square, and output are interfaces yes?
 
+That makes sense.
+
+Output is an interface. 
+Square I thought would be an immutable value type, so I didn't think to make an interface for it. I supposed there could be a Square Interface that still supports/maintains immutability.
+
+> Yes - square could be an enum :)
+

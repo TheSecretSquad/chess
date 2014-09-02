@@ -11,27 +11,26 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {
 
-    private Game game;
-    private Square square;
-    @Mock
-    private MovesOutput movesOutput;
-    @Mock
-    private Board board;
-    
-    @Before
-    public void setUp() throws Exception {
-	square = anySquare();
-	game = new Game(board, movesOutput);
-    }
-    
-    private Square anySquare()
-    {
-	return new Square(1, 1);
-    }
-    
-    @Test
-    public void shouldShowMovesFromSquareOnBoardToOutput() {
-	game.showMovesFor(square);
-	verify(board).showMovesFor(square, movesOutput);
-    }
+	private Game game;
+	private Square square;
+	@Mock
+	private MovesOutput movesOutput;
+	@Mock
+	private Board board;
+
+	@Before
+	public void setUp() throws Exception {
+		square = anySquare();
+		game = new Game(board, movesOutput);
+	}
+
+	private Square anySquare() {
+		return new Square(1, 1);
+	}
+
+	@Test
+	public void shouldShowMovesFromSquareOnBoardToOutput() {
+		game.showMovesFor(square);
+		verify(board).showMovesFor(square, movesOutput);
+	}
 }

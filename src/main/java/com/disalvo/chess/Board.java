@@ -2,5 +2,5 @@ package com.disalvo.chess;
 
 public interface Board {
 
-    void showMovesFor(Square square, MovesOutput movesOutput);
+	void showMovesFor(Square square, MovesOutput movesOutput);
 }

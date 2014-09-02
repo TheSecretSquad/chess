@@ -118,4 +118,8 @@ You're thinking just make an enum with 64 squares?
 > You might want to provide a constructor that takes a row and column but converts to single value.
 > This should be ok for now.
 
+I changed Square to an enum.
 
+I thought for row and column we could use File and Rank, since they are chess domain terms. I also created enums for them. Any thoughts on these decisions?
+
+Is it okay that we stopped testing Game to create the Square enum? Will this affect the design at all? In the reading I've done on testing, I've seen that it's typical to stop working on the class under test and implement simple value classes like Square when doing state-based testing, but in interaction-based testing should we have instead mocked an interface and implemented Square at a later point?

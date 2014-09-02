@@ -1,4 +1,4 @@
-package main;
+package com.disalvo.chess;
 
 public class Game {
     

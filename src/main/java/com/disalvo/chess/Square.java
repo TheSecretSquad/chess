@@ -1,4 +1,4 @@
-package main;
+package com.disalvo.chess;
 
 public final class Square {
 

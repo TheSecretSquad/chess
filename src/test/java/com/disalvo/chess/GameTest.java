@@ -1,16 +1,12 @@
-package test;
-
-import static org.mockito.Mockito.verify;
-import main.Board;
-import main.Game;
-import main.MovesOutput;
-import main.Square;
+package com.disalvo.chess;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {

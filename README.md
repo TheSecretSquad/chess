@@ -85,10 +85,12 @@ You had said:
 
 I was thinking a bit more deeply on this and considering what I might do if faced with this design decision. Here's how I would think about it that often gets me stuck.
 
-Choosing to move the parameter to the constructor is a trade off. Moving the output to a constructor parameter would prevent changing the output during runtime without recreating the Game object or introducing a setter on the Game object. If it was expected that the output would change often then I can think of a few design choices that I would stumble over:
+Choosing to move the parameter to the constructor is a trade off. Moving the output to a constructor parameter would prevent changing the output during runtime without recreating the Game object or introducing a setter on the Game object.
+If it was expected that the output would change often then I can think of a few design choices that I would stumble over:
 Create the method like you originally had it: showMovesForOn(square, output). This is most flexible, but also commits the public interface of the Game class to depend on the output. How do you tell if that dependency is okay?
 Keep the constructor parameter and add a method like game.outputMovesTo(output) to change the output when needed. Same issue as above, and personally I don't like the setter-like nature of it.
-Keep the constructor parameter and create different output implementations that either output conditionally to different places, or if multiple simultaneous outputs are needed, use some type of composite output. I would lean toward this because the Game object doesn't really care if the moves are output to one or multiple places.
+Keep the constructor parameter and create different output implementations that either output conditionally to different places, or if multiple simultaneous outputs are needed, use some type of composite output. 
+I would lean toward this because the Game object doesn't really care if the moves are output to one or multiple places.
 Any thoughts?
 
 > Consider the constructor output a default, if you call showMovesFor(square) then output is used and showMovesForOn(square, output) method is called passing the default. When needed for something other than the default the full method can be used.

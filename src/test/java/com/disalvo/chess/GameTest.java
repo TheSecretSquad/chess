@@ -25,7 +25,7 @@ public class GameTest {
 	}
 
 	private Square anySquare() {
-		return new Square(1, 1);
+		return Square.A1;
 	}
 
 	@Test

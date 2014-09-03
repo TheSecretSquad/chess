@@ -122,4 +122,17 @@ I changed Square to an enum.
 
 I thought for row and column we could use File and Rank, since they are chess domain terms. I also created enums for them. Any thoughts on these decisions?
 
-Is it okay that we stopped testing Game to create the Square enum? Will this affect the design at all? In the reading I've done on testing, I've seen that it's typical to stop working on the class under test and implement simple value classes like Square when doing state-based testing, but in interaction-based testing should we have instead mocked an interface and implemented Square at a later point?
+Is it okay that we stopped testing Game to create the Square enum? Will this affect the design at all?
+ 
+In the reading I've done on testing, I've seen that it's typical to stop working on the class under test and implement simple value classes like Square when doing state-based testing, but in interaction-based testing should we have instead mocked an interface and implemented Square at a later point?
+
+> Using the names in the Domain is always the right thing to do.
+>
+> Since you are working remotely to me it will be necessary to stop working on one class and focus on another. As long as the class you stop working on is at a good pause point, with passing tests.
+> In a paring situation and by yourself if you keep a good dicipline the Square used for testing the Game class would be a mock until you are ready to implement it, this way the behaviour of Square relied upon by Game is what drives the implementation of Square. When you do classes in isolation then even with the best intentions they tend to have more behaviour and complexity than is actually needed.
+> 
+>
+> I would move the inner enums out of the Square enum into their own file. Having one class per file is 'usually' the thing to do.
+>
+
+

@@ -8,5 +8,5 @@ public enum File {
 	E,
 	F,
 	G,
-	H;
+	H
 }

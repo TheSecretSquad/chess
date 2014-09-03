@@ -70,6 +70,6 @@ public enum Square {
 	private final String position;
 
 	Square(final File file, final Rank rank) {
-		position = file.toString() + rank.toString();
+		position = "" + file + rank;
 	}
 }

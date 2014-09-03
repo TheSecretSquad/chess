@@ -1,13 +1,13 @@
 package com.disalvo.chess;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class RankTest {
 
 	@Test
-	public void shouldHaveStringValueEqualToNumericValue() {
+	public void shouldHaveStringConversionEqualToEnumName() {
 		assertEquals("1", Rank.ONE.toString());
 		assertEquals("2", Rank.TWO.toString());
 		assertEquals("3", Rank.THREE.toString());

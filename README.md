@@ -136,4 +136,7 @@ In the reading I've done on testing, I've seen that it's typical to stop working
 >
 > You may notice I enabled the tests to run in parrallel - you want the feedback loop to be as quick as possible. Write a test, run it, add code, refactor, repeat. etc
 >
+>
+> I changed the name of some methods in a hope they are more meaningful. I also added a private test method to make the test more clear, removing the repeated toString().
+>
 

@@ -31,6 +31,6 @@ public class GameTest {
 	@Test
 	public void shouldShowMovesFromSquareOnBoardToOutput() {
 		game.showMovesFor(square);
-		verify(board).showMovesFor(square, movesOutput);
+		verify(board).showMovesForOn(square, movesOutput);
 	}
 }

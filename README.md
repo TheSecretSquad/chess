@@ -140,3 +140,18 @@ In the reading I've done on testing, I've seen that it's typical to stop working
 > I changed the name of some methods in a hope they are more meaningful. I also added a private test method to make the test more clear, removing the repeated toString().
 >
 
+Should we create an interface for Square instead and mock it? I would like to drive the implementation through emerging behavior as much as possible. I want to experience first hand finding the correct behaviors through testing with mocks.
+
+We can keep the Square and related enums on the side, but wait until later to continue implementing them (maybe rename Square to be FileRankSquare, or something to distinguish it from the Square interface). What do you think? Would it make sense to do this?
+
+> I wouldn't change Square to an interface just yet.
+>
+> You have other interfaces to see how behaviour is driven out.
+>
+> Besides if the class under test interacts w existing classes and they are not expensive to Instantiate then you can just use them. You would mock out a database for example but not an enum. Either way we can refactor it when needed.
+>
+>
+> We have a method on game but is it the best method to teach us something? Adding a method should teach us something and show us progress.
+>
+> For example running the app right now wouldn't do much. What method could we add and to what class to show we are making progress to our goal of a chess game? Let's add a test for that method next.
+>

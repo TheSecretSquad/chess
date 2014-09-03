@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.disalvo.chess.Square.File;
-
 public class FileTest {
 
 	@Test

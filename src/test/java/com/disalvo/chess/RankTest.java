@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.disalvo.chess.Square.Rank;
-
 public class RankTest {
 
 	@Test

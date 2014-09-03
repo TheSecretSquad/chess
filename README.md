@@ -134,5 +134,6 @@ In the reading I've done on testing, I've seen that it's typical to stop working
 >
 > I would move the inner enums out of the Square enum into their own file. Having one class per file is 'usually' the thing to do.
 >
-
+> You may notice I enabled the tests to run in parrallel - you want the feedback loop to be as quick as possible. Write a test, run it, add code, refactor, repeat. etc
+>
 

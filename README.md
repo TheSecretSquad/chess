@@ -155,3 +155,43 @@ We can keep the Square and related enums on the side, but wait until later to co
 >
 > For example running the app right now wouldn't do much. What method could we add and to what class to show we are making progress to our goal of a chess game? Let's add a test for that method next.
 >
+>How about you think of a method we can add to game that is usable right now such that we could show the game to another and they can see it is working?
+
+I've been thinking about this ... and I don't really know what to do.
+
+When you say "see it is working", do you mean see that the method is working or the game class as a whole is working?
+
+The only thing I thought of is making a "start" method, such that starting the game should tell the players the game has started, select one player to take their turn, and tell the players whose turn it currently is. I'm still not sure if this meets the criteria.
+
+Is that first test I wrote for showMovesFor completely useless? I feel like it is.
+
+>No test is completely useless.
+
+>How about we have a method to start the game which also prints the current board to the console?
+
+... The first thing I thought of was to display the board, but I was thinking about what you said in the old thread and ended up complicating things.
+
+You said:
+>What method could we add and to what class to show we are making progress to our goal of a chess game?
+
+Thinking about this, I convinced myself that displaying the board seems too simple. It must be a more intricate detail of gameplay.
+
+Do we actually want to print the board to the console, or do we send a message to the board to print itself passing some interface that facilitates displaying the board?
+
+Should it be abstract to facilitate showing the board on anything, for example, console or GUI? Or should it specifically print to a console?
+
+I guess what I'm asking is should it look like this...
+
+@Test
+public void shouldShowTheBoardWhenGameStarts() {
+	game.start();
+	verify(board).showTo(boardOutput);
+}
+
+or this...
+
+@Test
+public void shouldPrintTheBoardToTheConsoleWhenGameStarts() {
+	game.start();
+	verify(board).printTo(console); // or verify(console).print(board);
+}

@@ -182,16 +182,18 @@ Should it be abstract to facilitate showing the board on anything, for example, 
 
 I guess what I'm asking is should it look like this...
 
+```java
 @Test
 public void shouldShowTheBoardWhenGameStarts() {
 	game.start();
 	verify(board).showTo(boardOutput);
 }
-
+```
 or this...
-
+```java
 @Test
 public void shouldPrintTheBoardToTheConsoleWhenGameStarts() {
 	game.start();
 	verify(board).printTo(console); // or verify(console).print(board);
 }
+```

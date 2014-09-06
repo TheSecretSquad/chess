@@ -52,7 +52,7 @@ My starting point is actually piece movement. The goal is when a user selects a 
 > This disconnect between the input and output mechanism will influence the design which should be independent of it. For example:
 >
 >
-> game showMovesForSquare: square On: output
+> `game showMovesForSquare: square On: output`
 >
 >
 > Notice how the names of the domain (Chess Game) are coming through, this helps focus and separates the what from the how.
@@ -62,16 +62,16 @@ My starting point is actually piece movement. The goal is when a user selects a 
 
 I'm most comfortable with Java or C#. I've been writing this project with Java.
 
-Your analysis is spot on. Your showMovesForSquare:On: message makes perfect sense to me. I know just enough Smalltalk syntax to understand it!
+Your analysis is spot on. Your `showMovesForSquare:On:` message makes perfect sense to me. I know just enough Smalltalk syntax to understand it!
 
 I agree that the output (the place where the game should send the moves) should be passed into the game, but how do you tell when it should be an argument to the message as opposed to the constructor?
 
 I'm curious to see how we would implement this.
 
 > I try to construct my objects w valid state and then not change it, so in this case you can pass the board and the output to the constructor, then 
-> Game has the showMovesFor(Square selectedSquare) method (changed to Java code examples).
+> `Game` has the `showMovesFor(Square selectedSquare)` method (changed to Java code examples).
 >
-> I would have this delegate to a private method showMovesForOn(square, output)
+> I would have this delegate to a private method `showMovesForOn(square, output)`
 > because I like to have dependencies for methods be obvious. This approach doesn't take much longer and it helps later w testing and expanding abilities.
 
 
@@ -79,35 +79,35 @@ I wanted to ask another question about the constructor vs method parameter conce
 
 You had said:
 > I try to construct my objects w valid state and then not change it, so in this case you can pass the board and the output to the constructor, then 
-> Game has the showMovesFor(Square selectedSquare) method.
-> I would have this delegate to a private method showMovesForOn(square, output)
+> `Game` has the `showMovesFor(Square selectedSquare)` method.
+> I would have this delegate to a private method `showMovesForOn(square, output)`
 > because I like to have dependencies for methods be obvious. This approach doesn't take much longer and it helps later w testing and expanding abilities.
 
 I was thinking a bit more deeply on this and considering what I might do if faced with this design decision. Here's how I would think about it that often gets me stuck.
 
-Choosing to move the parameter to the constructor is a trade off. Moving the output to a constructor parameter would prevent changing the output during runtime without recreating the Game object or introducing a setter on the Game object.
+Choosing to move the parameter to the constructor is a trade off. Moving the output to a constructor parameter would prevent changing the output during runtime without recreating the `Game` object or introducing a setter on the `Game` object.
 
 If it was expected that the output would change often then I can think of a few design choices that I would stumble over:
 
-Create the method like you originally had it: showMovesForOn(square, output). This is most flexible, but also commits the public interface of the Game class to depend on the output. How do you tell if that dependency is okay?
+Create the method like you originally had it: `showMovesForOn(square, output)`. This is most flexible, but also commits the public interface of the `Game` class to depend on the output. How do you tell if that dependency is okay?
 
-Keep the constructor parameter and add a method like game.outputMovesTo(output) to change the output when needed. Same issue as above, and personally I don't like the setter-like nature of it.
+Keep the constructor parameter and add a method like `game.outputMovesTo(output)` to change the output when needed. Same issue as above, and personally I don't like the setter-like nature of it.
 
 Keep the constructor parameter and create different output implementations that either output conditionally to different places, or if multiple simultaneous outputs are needed, use some type of composite output. 
 
-I would lean toward this because the Game object doesn't really care if the moves are output to one or multiple places.
+I would lean toward this because the `Game` object doesn't really care if the moves are output to one or multiple places.
 Any thoughts?
 
-> Consider the constructor output a default, if you call showMovesFor(square) then output is used and showMovesForOn(square, output) method is called passing the default. When needed for something other than the default the full method can be used.
+> Consider the constructor output a default, if you call `showMovesFor(square)` then output is used and `showMovesForOn(square, output)` method is called passing the default. When needed for something other than the default the full method can be used.
 >
-> However, you don't have a need for it now - I'd still have the showMovesFor(...) and showMovesForOn(...) methods but the later would not be public.
+> However, you don't have a need for it now - I'd still have the `showMovesFor(...)` and `showMovesForOn(...)` methods but the later would not be public.
 >
 > Btw - square, and output are interfaces yes?
 
 That makes sense.
 
-Output is an interface. 
-Square I thought would be an immutable value type, so I didn't think to make an interface for it. I supposed there could be a Square Interface that still supports/maintains immutability.
+`Output` is an interface. 
+`Square` I thought would be an immutable value type, so I didn't think to make an interface for it. I supposed there could be a `Square` Interface that still supports/maintains immutability.
 
 > Yes - square could be an enum :)
 
@@ -118,40 +118,40 @@ You're thinking just make an enum with 64 squares?
 > You might want to provide a constructor that takes a row and column but converts to single value.
 > This should be ok for now.
 
-I changed Square to an enum.
+I changed `Square` to an enum.
 
 I thought for row and column we could use File and Rank, since they are chess domain terms. I also created enums for them. Any thoughts on these decisions?
 
-Is it okay that we stopped testing Game to create the Square enum? Will this affect the design at all?
+Is it okay that we stopped testing `Game` to create the `Square` enum? Will this affect the design at all?
  
-In the reading I've done on testing, I've seen that it's typical to stop working on the class under test and implement simple value classes like Square when doing state-based testing, but in interaction-based testing should we have instead mocked an interface and implemented Square at a later point?
+In the reading I've done on testing, I've seen that it's typical to stop working on the class under test and implement simple value classes like `Square` when doing state-based testing, but in interaction-based testing should we have instead mocked an interface and implemented `Square` at a later point?
 
 > Using the names in the Domain is always the right thing to do.
 >
 > Since you are working remotely to me it will be necessary to stop working on one class and focus on another. As long as the class you stop working on is at a good pause point, with passing tests.
-> In a paring situation and by yourself if you keep a good dicipline the Square used for testing the Game class would be a mock until you are ready to implement it, this way the behaviour of Square relied upon by Game is what drives the implementation of Square. When you do classes in isolation then even with the best intentions they tend to have more behaviour and complexity than is actually needed.
+> In a paring situation and by yourself if you keep a good dicipline the `Square` used for testing the `Game` class would be a mock until you are ready to implement it, this way the behaviour of `Square` relied upon by `Game` is what drives the implementation of `Square`. When you do classes in isolation then even with the best intentions they tend to have more behaviour and complexity than is actually needed.
 > 
 >
-> I would move the inner enums out of the Square enum into their own file. Having one class per file is 'usually' the thing to do.
+> I would move the inner enums out of the `Square` enum into their own file. Having one class per file is 'usually' the thing to do.
 >
 > You may notice I enabled the tests to run in parrallel - you want the feedback loop to be as quick as possible. Write a test, run it, add code, refactor, repeat. etc
 >
 >
-> I changed the name of some methods in a hope they are more meaningful. I also added a private test method to make the test more clear, removing the repeated toString().
+> I changed the name of some methods in a hope they are more meaningful. I also added a private test method to make the test more clear, removing the repeated `toString()`.
 >
 
-Should we create an interface for Square instead and mock it? I would like to drive the implementation through emerging behavior as much as possible. I want to experience first hand finding the correct behaviors through testing with mocks.
+Should we create an interface for `Square` instead and mock it? I would like to drive the implementation through emerging behavior as much as possible. I want to experience first hand finding the correct behaviors through testing with mocks.
 
-We can keep the Square and related enums on the side, but wait until later to continue implementing them (maybe rename Square to be FileRankSquare, or something to distinguish it from the Square interface). What do you think? Would it make sense to do this?
+We can keep the `Square` and related enums on the side, but wait until later to continue implementing them (maybe rename `Square` to be `FileRankSquare`, or something to distinguish it from the `Square` interface). What do you think? Would it make sense to do this?
 
-> I wouldn't change Square to an interface just yet.
+> I wouldn't change `Square` to an interface just yet.
 >
 > You have other interfaces to see how behaviour is driven out.
 >
 > Besides if the class under test interacts w existing classes and they are not expensive to Instantiate then you can just use them. You would mock out a database for example but not an enum. Either way we can refactor it when needed.
 >
 >
-> We have a method on game but is it the best method to teach us something? Adding a method should teach us something and show us progress.
+> We have a method on `Game` but is it the best method to teach us something? Adding a method should teach us something and show us progress.
 >
 > For example running the app right now wouldn't do much. What method could we add and to what class to show we are making progress to our goal of a chess game? Let's add a test for that method next.
 >
@@ -159,11 +159,11 @@ We can keep the Square and related enums on the side, but wait until later to co
 
 I've been thinking about this ... and I don't really know what to do.
 
-When you say "see it is working", do you mean see that the method is working or the game class as a whole is working?
+When you say "see it is working", do you mean see that the method is working or the `Game` class as a whole is working?
 
-The only thing I thought of is making a "start" method, such that starting the game should tell the players the game has started, select one player to take their turn, and tell the players whose turn it currently is. I'm still not sure if this meets the criteria.
+The only thing I thought of is making a `start()` method, such that starting the `Game` should tell the players the game has started, select one player to take their turn, and tell the players whose turn it currently is. I'm still not sure if this meets the criteria.
 
-Is that first test I wrote for showMovesFor completely useless? I feel like it is.
+Is that first test I wrote for `showMovesFor` completely useless? I feel like it is.
 
 >No test is completely useless.
 
@@ -176,7 +176,7 @@ You said:
 
 Thinking about this, I convinced myself that displaying the board seems too simple. It must be a more intricate detail of gameplay.
 
-Do we actually want to print the board to the console, or do we send a message to the board to print itself passing some interface that facilitates displaying the board?
+Do we actually want to print the board to the console, or do we send a message to the `Board` to print itself passing some interface that facilitates displaying the board?
 
 Should it be abstract to facilitate showing the board on anything, for example, console or GUI? Or should it specifically print to a console?
 
@@ -189,7 +189,9 @@ public void shouldShowTheBoardWhenGameStarts() {
 	verify(board).showTo(boardOutput);
 }
 ```
+
 or this...
+
 ```java
 @Test
 public void shouldPrintTheBoardToTheConsoleWhenGameStarts() {
@@ -209,46 +211,48 @@ It serves as a good example of the kind of design options that I wrestle with.
 
 They give an example at around 8 minutes of a system for a location-aware media player. In short, the system receives GPS location updates, and plays music specific for the location you're in.
 
-In their design they have a LocationTracker that sends locationChanged messages to a LocationAware interface. The LocationAware interface is realized by a DJ object, which decides which track to play, and tells a MediaControl interface to play the track. The MediaControl is realized by a MediaPlayer object, which plays the track. The DJ also implements a MediaTracker interface which is told when the media is finished.
+In their design they have a `LocationTracker` that sends `locationChanged` messages to a `LocationAware` interface. The `LocationAware` interface is realized by a `DJ` object, which decides which track to play, and tells a `MediaControl` interface to play the track. The `MediaControl` is realized by a `MediaPlayer` object, which plays the track. The `DJ` also implements a `MediaTracker` interface which is told when the media is finished.
 
 The shell of the code looks like this:
 
 ```java
 public interface LocationAware {
 
-    void locationChangedTo(String newLocationName);
+	void locationChangedTo(String newLocationName);
 }
 
 public interface MediaTracker {
 
-    void mediaFinished();
+	void mediaFinished();
 }
 
 public class DJ implements LocationAware, MediaTracker {
 	
-// ...
-
-public DJ(MediaControl mediaControl) {
-    this.mediaControl = mediaControl;
+	// ...
+	
+	public DJ(MediaControl mediaControl) {
+	    this.mediaControl = mediaControl;
+	}
+	
+	@Override
+	public void locationChangedTo(String newLocationName) {
+		// ...
+	}
+	
+	@Override
+	public void mediaFinished() {
+		// ...
+	}
+	
+	public void addTrackForLocation(String location, String track) {
+		// ...
+	}
 }
-
-@Override
-public void locationChangedTo(String newLocationName) {
-// ...
-}
-
-@Override
-public void mediaFinished() {
-// ...
-}
-
-public void addTrackForLocation(String location, String track) {
-// ...
-}
-}
+```
 
 One of the tests looks like (edited - changed JMock to Mockito style):
 
+```java
 @Mock
 private MediaControl mediaControl;
 private DJ dj = new DJ(mediaControl);
@@ -266,7 +270,7 @@ public void startsPlayingTrackForCurrentLocationWhenLocationFirstDetected() {
 }
 ```
 
-This design got me thinking about some things Sandi Metz says in ther POODR book.
+This design got me thinking about some things Sandi Metz says in her POODR book.
 
 "...blind trust is a keystone of object-oriented design. It allows objects to collaborate without binding themselves to context and is necessary in any application that expects to grow and change."
 
@@ -280,34 +284,29 @@ She also mentions three types of interactions from the calling object's perspect
 
 “I know what I want and I trust you to do your part.” (this is the goal)
 
-
 If I'm understanding this all correctly, an object calling a method should avoid assuming too much about what the object does. To do this, the message sender should bind to a name that is within the domain of the sender.
 
-For example, they easily could have said the LocationTracker should tell the DJ to play a track for the current location.
+For example, they easily could have said the `LocationTracker` should tell the `DJ` to play a track for the current location.
 
-LocationTracker---->LocationAware.playTrackFor(location).
+`LocationTracker`---->`LocationAware.playTrackFor(location)`.
 
+This seems reasonable because it's technically "tell, don't ask". It's telling it what to do, not how to do it, but it also has a lot of context that the `LocationTracker` shouldn't assume.
 
-This seems reasonable because it's technically "tell, don't ask". It's telling it what to do, not how to do it, but it also has a lot of context that the LocationTracker shouldn't assume.
+Even though the behavior they want is for something to play a track for the location, it doesn't make sense for the `LocationTracker` to assume this. It's more context than the `LocationTracker` is qualified to have. In other words, _playing a track is a concrete example of something that happens "when the location changes"_. The `locationChanged(location)` message is something the `LocationTracker` does know about. The `DJ` is trusted to do the right thing in response to the change in location.
 
+So how does all this relate to our chess app? It got me thinking, is `game.showMovesFor(square)` assuming too much? While it is "tell, don't ask", I feel that it might be saying, “I know what I want and I know what you do.”, instead of “I know what I want and I trust you to do your part.”
 
-Even though the behavior they want is for something to play a track for the location, it doesn't make sense for the LocationTracker to assume this. It's more context than the LocationTracker is qualified to have. In other words, playing a track is a concrete example of something that happens "when the location changes". The locationChanged(location) message is something the LocationTracker does know about. The DJ is trusted to do the right thing in response to the change in location.
-
-
-So how does all this relate to our chess app? It got me thinking, is game.showMovesFor(square) assuming too much? While it is "tell, don't ask", I feel that it might be saying, “I know what I want and I know what you do.”, instead of “I know what I want and I trust you to do your part.”
-
-
-Would it be better to take the perspective of: Showing the moves for a square is a concrete example of something that could happen "when a square is chosen". It is only incidentally part of our Game's implementation that we show the moves when this happens. Would it be better to have a method game.squareChosen(square), and our particular Game implementation is trusted to respond by delivering the available moves for that square?
+Would it be better to take the perspective of: _Showing the moves for a square is a concrete example of something that could happen "when a square is chosen"_. It is only incidentally part of our `Game`'s implementation that we show the moves when this happens. Would it be better to have a method `game.squareChosen(square)`, and our particular `Game` implementation is trusted to respond by delivering the available moves for that square?
 
 Yikes! That was long. I owe you a beer for this one.
 
-
-> >>Would it be better to have a method game.squareChosen(square), and our particular Game implementation is trusted to respond by delivering the available moves for that square?
-> You are right one the money. I didn't want to straight out say what you should do because that would be like spoiling a movie by telling you the ending.
+>>Would it be better to have a method `game.squareChosen(square)`, and our particular `Game` implementation is trusted to respond by delivering the available moves for that square?
+>
+> You are right on the money. I didn't want to straight out say what you should do because that would be like spoiling a movie by telling you the ending.
 > Better you explore and come to your own conclusion.
 >
-> Now you have to write a test for game.squareChosen(square)
+> Now you have to write a test for `game.squareChosen(square)`
 >
-> However, your method is past-tense and your request is not, so maybe game.chooseSquare(s), game.activeSquare(s) or game.activate(s)
+> However, your method is past-tense and your request is not, so maybe `game.chooseSquare(s)`, `game.activeSquare(s)` or `game.activate(s)`.
 >
 

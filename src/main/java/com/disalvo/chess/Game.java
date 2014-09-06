@@ -13,4 +13,8 @@ public class Game {
 	public void showMovesFor(final Square square) {
 		board.showMovesForOn(square, movesOutput);
 	}
+
+	public void start() {
+		board.printToConsole();
+	}
 }

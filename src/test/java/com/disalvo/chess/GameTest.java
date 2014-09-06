@@ -31,4 +31,10 @@ public class GameTest {
 		game.showMovesFor(square);
 		verify(board).showMovesForOn(square, movesOutput);
 	}
+    
+    @Test
+    public void shouldPrintTheBoardToTheConsoleWhenStarted() {
+    	game.start();
+    	verify(board).printToConsole();
+    }
 }

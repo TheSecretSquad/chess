@@ -302,3 +302,12 @@ Would it be better to take the perspective of: Showing the moves for a square is
 Yikes! That was long. I owe you a beer for this one.
 
 
+> >>Would it be better to have a method game.squareChosen(square), and our particular Game implementation is trusted to respond by delivering the available moves for that square?
+> You are right one the money. I didn't want to straight out say what you should do because that would be like spoiling a movie by telling you the ending.
+> Better you explore and come to your own conclusion.
+>
+> Now you have to write a test for game.squareChosen(square)
+>
+> However, your method is past-tense and your request is not, so maybe game.chooseSquare(s), game.activeSquare(s) or game.activate(s)
+>
+

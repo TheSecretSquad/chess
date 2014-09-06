@@ -197,3 +197,108 @@ public void shouldPrintTheBoardToTheConsoleWhenGameStarts() {
 	verify(board).printTo(console); // or verify(console).print(board);
 }
 ```
+
+> How about you make the chess game work on the console for now?
+>
+
+I hope you don't mind if I digress to ask a design question.
+
+I happened to be watching a presentation today by Steve Freeman and Nat Pryce (found here: http://www.infoq.com/presentations/Mock-Objects-Nat-Pryce-Steve-Freeman). Their code example got me thinking.
+
+It serves as a good example of the kind of design options that I wrestle with.
+
+They give an example at around 8 minutes of a system for a location-aware media player. In short, the system receives GPS location updates, and plays music specific for the location you're in.
+
+In their design they have a LocationTracker that sends locationChanged messages to a LocationAware interface. The LocationAware interface is realized by a DJ object, which decides which track to play, and tells a MediaControl interface to play the track. The MediaControl is realized by a MediaPlayer object, which plays the track. The DJ also implements a MediaTracker interface which is told when the media is finished.
+
+The shell of the code looks like this:
+
+```java
+public interface LocationAware {
+
+    void locationChangedTo(String newLocationName);
+}
+
+public interface MediaTracker {
+
+    void mediaFinished();
+}
+
+public class DJ implements LocationAware, MediaTracker {
+	
+// ...
+
+public DJ(MediaControl mediaControl) {
+    this.mediaControl = mediaControl;
+}
+
+@Override
+public void locationChangedTo(String newLocationName) {
+// ...
+}
+
+@Override
+public void mediaFinished() {
+// ...
+}
+
+public void addTrackForLocation(String location, String track) {
+// ...
+}
+}
+
+One of the tests looks like (edited - changed JMock to Mockito style):
+
+@Mock
+private MediaControl mediaControl;
+private DJ dj = new DJ(mediaControl);
+
+@Before
+public void setUp() {
+    dj.addTrackForLocation(someLocation, someTrack);
+    dj.addTrackForLocation(otherLocation, otherTrak);
+}
+
+@Test
+public void startsPlayingTrackForCurrentLocationWhenLocationFirstDetected() {
+    dj.locationChanged(someLocation);
+    verify(mediaControl).play(someTrack);
+}
+```
+
+This design got me thinking about some things Sandi Metz says in ther POODR book.
+
+"...blind trust is a keystone of object-oriented design. It allows objects to collaborate without binding themselves to context and is necessary in any application that expects to grow and change."
+
+"When messages are trusting and ask for what the sender wants instead of telling the receiver how to behave, objects naturally evolve public interfaces that are flexible and reusable in novel and unexpected ways."
+
+She also mentions three types of interactions from the calling object's perspective:
+
+“I know what I want and I know how you do it.”
+
+“I know what I want and I know what you do.”
+
+“I know what I want and I trust you to do your part.” (this is the goal)
+
+
+If I'm understanding this all correctly, an object calling a method should avoid assuming too much about what the object does. To do this, the message sender should bind to a name that is within the domain of the sender.
+
+For example, they easily could have said the LocationTracker should tell the DJ to play a track for the current location.
+
+LocationTracker---->LocationAware.playTrackFor(location).
+
+
+This seems reasonable because it's technically "tell, don't ask". It's telling it what to do, not how to do it, but it also has a lot of context that the LocationTracker shouldn't assume.
+
+
+Even though the behavior they want is for something to play a track for the location, it doesn't make sense for the LocationTracker to assume this. It's more context than the LocationTracker is qualified to have. In other words, playing a track is a concrete example of something that happens "when the location changes". The locationChanged(location) message is something the LocationTracker does know about. The DJ is trusted to do the right thing in response to the change in location.
+
+
+So how does all this relate to our chess app? It got me thinking, is game.showMovesFor(square) assuming too much? While it is "tell, don't ask", I feel that it might be saying, “I know what I want and I know what you do.”, instead of “I know what I want and I trust you to do your part.”
+
+
+Would it be better to take the perspective of: Showing the moves for a square is a concrete example of something that could happen "when a square is chosen". It is only incidentally part of our Game's implementation that we show the moves when this happens. Would it be better to have a method game.squareChosen(square), and our particular Game implementation is trusted to respond by delivering the available moves for that square?
+
+Yikes! That was long. I owe you a beer for this one.
+
+

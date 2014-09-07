@@ -11,7 +11,7 @@ public class Game {
 	}
 
 	public void chooseSquare(final Square square) {
-		board.showMovesForOn(square, movesOutput);
+		board.sendMovesForTo(square, movesOutput);
 	}
 
 	public void start() {

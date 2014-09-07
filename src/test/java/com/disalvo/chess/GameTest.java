@@ -29,7 +29,7 @@ public class GameTest {
     @Test
 	public void shouldShowMovesForSquareWhenSquareIsChosen() {
 		game.chooseSquare(square);
-		verify(board).showMovesForOn(square, movesOutput);
+		verify(board).sendMovesForTo(square, movesOutput);
 	}
     
     @Test

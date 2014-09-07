@@ -310,3 +310,8 @@ Yikes! That was long. I owe you a beer for this one.
 > However, your method is past-tense and your request is not, so maybe `game.chooseSquare(s)`, `game.activeSquare(s)` or `game.activate(s)`.
 >
 
+Okay, cool. I think I'm starting to understand the concept of messaging a little better.
+
+I'll setup the test for it.
+
+As far as the name of the method goes, I think they all come with their own interesting semantic implications. It's a close call between `chooseSquare(s)` and `activate(s)`.

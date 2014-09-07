@@ -1,8 +1,8 @@
 package com.disalvo.chess;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class FileTest {
 
@@ -18,7 +18,7 @@ public class FileTest {
 		assertEquals("H", File.H.toString());
 	}
 
-    private void assertEqualsFile(String actual, File expected) {
-        assertEquals(actual, expected.toString());
-    }
+	private void assertEqualsFile(String actual, File expected) {
+		assertEquals(actual, expected.toString());
+	}
 }

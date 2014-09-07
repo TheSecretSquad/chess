@@ -3,9 +3,9 @@ package com.disalvo.chess;
 public class Game {
 
 	private final Board board;
-	private final MovesOutput movesOutput;
+	private final MovesReceiver movesOutput;
 
-	public Game(final Board board, final MovesOutput movesOutput) {
+	public Game(final Board board, final MovesReceiver movesOutput) {
 		this.board = board;
 		this.movesOutput = movesOutput;
 	}

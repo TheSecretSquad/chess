@@ -10,7 +10,7 @@ public class Game {
 		this.movesOutput = movesOutput;
 	}
 
-	public void showMovesFor(final Square square) {
+	public void chooseSquare(final Square square) {
 		board.showMovesForOn(square, movesOutput);
 	}
 

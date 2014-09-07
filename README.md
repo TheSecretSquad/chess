@@ -314,4 +314,13 @@ Okay, cool. I think I'm starting to understand the concept of messaging a little
 
 I'll setup the test for it.
 
-As far as the name of the method goes, I think they all come with their own interesting semantic implications. It's a close call between `chooseSquare(s)` and `activate(s)`.
+As far as the name of the method goes, I think they all come with their own interesting semantic implications. It's a close call between `game.chooseSquare(s)` and `game.activate(s)`.
+
+I decided to go with `game.chooseSquare(s)` for now only because it seems closest to the domain. Can you think of any reason one of the other names might be better?
+
+For the same reason we changed `game.showMovesFor(s)` to `game.chooseSquare(s)`, I changed `board.showMovesForOn(s, movesOutput)` to `board.sendMovesForTo(s, movesReceiver)`; and changed `MovesOutput` to `MovesReceiver`. What do you think about this?
+
+You had said earlier:
+> How about you think of a method we can add to game that is usable right now such that we could show the game to another and they can see it is working?
+
+I'm not sure I understand this. If we show the game to another, what should they see? Are the tests passing proof enough that it's working?

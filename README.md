@@ -324,3 +324,6 @@ You had said earlier:
 > How about you think of a method we can add to game that is usable right now such that we could show the game to another and they can see it is working?
 
 I'm not sure I understand this. If we show the game to another, what should they see? Are the tests passing proof enough that it's working?
+
+> When you start a game you have a board with white and black pieces in their designated spots.
+> This could be a good starting test. That a new game has a board with pieces in the right spots.

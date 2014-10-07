@@ -1,11 +1,11 @@
 package com.disalvo.chess;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -13,9 +13,12 @@ public class GameTest {
 
 	private Game game;
 	private Square square;
-	private MovesReceiver movesReceiver = mock(MovesReceiver.class);
-	private Board board = mock(Board.class);
-	private StartingPieceConfiguration startingPieceConfiguration = mock(StartingPieceConfiguration.class);
+	@Mock
+	private MovesReceiver movesReceiver;
+	@Mock
+	private Board board;
+	@Mock
+	private StartingPieceConfiguration startingPieceConfiguration;
 
 	@Before
 	public void setUp() throws Exception {

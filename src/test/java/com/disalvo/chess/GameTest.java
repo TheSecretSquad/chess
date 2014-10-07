@@ -15,11 +15,12 @@ public class GameTest {
 	private Square square;
 	private MovesReceiver movesReceiver = mock(MovesReceiver.class);
 	private Board board = mock(Board.class);
+	private StartingPieceConfiguration startingPieceConfiguration = mock(StartingPieceConfiguration.class);
 
 	@Before
 	public void setUp() throws Exception {
 		square = anySquare();
-		game = new Game(board, movesReceiver);
+		game = new Game(board, startingPieceConfiguration, movesReceiver);
 	}
 
 	private Square anySquare() {
@@ -36,5 +37,11 @@ public class GameTest {
 	public void shouldPrintTheBoardToTheConsoleWhenStarted() {
 		game.start();
 		verify(board).printToConsole();
+	}
+	
+	@Test
+	public void shouldSetupPiecesOnTheBoardWhenStarted() {
+		game.start();
+		verify(startingPieceConfiguration).setup(board);
 	}
 }

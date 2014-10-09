@@ -327,3 +327,5 @@ I'm not sure I understand this. If we show the game to another, what should they
 
 > When you start a game you have a board with white and black pieces in their designated spots.
 > This could be a good starting test. That a new game has a board with pieces in the right spots.
+
+It seems like I did too little compared to what you suggested I test. I thought testing that each piece of each color is in the right place is too much low level detail for the `Game`. My solution doesn't actually guarantee that all the white and black pieces are in their designated spots, but it assumes an implementation of a `StartingPieceConfiguration` will ensure that. A side effect of this design is it allows different starting configurations (apparently chess has many). What do you think?

@@ -14,16 +14,12 @@ public class GameTest {
 	private Game game;
 	private Square square;
 	@Mock
-	private MovesReceiver movesReceiver;
-	@Mock
 	private Board board;
-	@Mock
-	private StartingPieceConfiguration startingPieceConfiguration;
 
 	@Before
 	public void setUp() throws Exception {
 		square = anySquare();
-		game = new Game(board, startingPieceConfiguration, movesReceiver);
+		game = new Game(board);
 	}
 
 	private Square anySquare() {
@@ -31,20 +27,14 @@ public class GameTest {
 	}
 
 	@Test
-	public void shouldSendMovesForSquareWhenSquareIsChosen() {
+	public void shouldChooseSquareOnTheBoardWhenSquareIsChosen() {
 		game.chooseSquare(square);
-		verify(board).sendMovesForTo(square, movesReceiver);
+		verify(board).chooseSquare(square);
 	}
 
 	@Test
-	public void shouldPrintTheBoardToTheConsoleWhenStarted() {
+	public void shouldPrepareTheBoardWhenStarted() {
 		game.start();
-		verify(board).printToConsole();
-	}
-	
-	@Test
-	public void shouldSetupPiecesOnTheBoardWhenStarted() {
-		game.start();
-		verify(startingPieceConfiguration).setup(board);
+		verify(board).prepareToPlay();
 	}
 }

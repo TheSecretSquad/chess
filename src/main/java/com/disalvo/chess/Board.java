@@ -2,7 +2,7 @@ package com.disalvo.chess;
 
 public interface Board {
 
-	void sendMovesForTo(Square square, MovesReceiver movesReceiver);
+	void chooseSquare(Square square);
 
-	void printToConsole();
+	void prepareToPlay();
 }

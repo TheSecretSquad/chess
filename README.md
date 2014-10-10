@@ -329,3 +329,11 @@ I'm not sure I understand this. If we show the game to another, what should they
 > This could be a good starting test. That a new game has a board with pieces in the right spots.
 
 It seems like I did too little compared to what you suggested I test. I thought testing that each piece of each color is in the right place is too much low level detail for the `Game`. My solution doesn't actually guarantee that all the white and black pieces are in their designated spots, but it assumes an implementation of a `StartingPieceConfiguration` will ensure that. A side effect of this design is it allows different starting configurations (apparently chess has many). What do you think?
+
+I just can't stop myself from analyzing the design. I hope you don't mind that I'm spending so much time evaluating the same code. This has been a real problem for me when designing classes. I can't tell if the messages (methods) make sense. One minute I convince myself it makes sense, and a minute later I'm convinced it's wrong. I try to remove context, keep things abstract and general, delay decisions, and not get caught up in implementation details. I find that when I do this, classes end up doing very little and the tests become sort of vague. I start to wonder that I've removed so much that the class isn't actually doing anything.
+
+I pushed a new branch to the repo called alternateDesign so you can see what I'm thinking. The changes are in GameTest, Game, and Board. I added an ExampleBoardImpl class to show how the board might be implemented.
+
+It seemed like the Game class was taking on dependencies and work related more to the Board's job, so I tried to remove some of the dependencies and some of the context in the method calls. The tests were starting to collect a lot of mocks and I thought the Game didn't really require them as dependencies to do its job of coordinating the game. I can provide a more detailed explanation on the reasons behind these changes if needed.
+
+Do you think I made anything better, or am I just rearranging the deck chairs on the Titanic. What do you think about this design?

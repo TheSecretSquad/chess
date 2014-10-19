@@ -138,7 +138,6 @@ In the reading I've done on testing, I've seen that it's typical to stop working
 >
 >
 > I changed the name of some methods in a hope they are more meaningful. I also added a private test method to make the test more clear, removing the repeated `toString()`.
->
 
 Should we create an interface for `Square` instead and mock it? I would like to drive the implementation through emerging behavior as much as possible. I want to experience first hand finding the correct behaviors through testing with mocks.
 
@@ -165,14 +164,14 @@ The only thing I thought of is making a `start()` method, such that starting the
 
 Is that first test I wrote for `showMovesFor` completely useless? I feel like it is.
 
->No test is completely useless.
+> No test is completely useless.
 
->How about we have a method to start the game which also prints the current board to the console?
+> How about we have a method to start the game which also prints the current board to the console?
 
 ... The first thing I thought of was to display the board, but I was thinking about what you said in the old thread and ended up complicating things.
 
 You said:
->What method could we add and to what class to show we are making progress to our goal of a chess game?
+> > What method could we add and to what class to show we are making progress to our goal of a chess game?
 
 Thinking about this, I convinced myself that displaying the board seems too simple. It must be a more intricate detail of gameplay.
 
@@ -201,7 +200,6 @@ public void shouldPrintTheBoardToTheConsoleWhenGameStarts() {
 ```
 
 > How about you make the chess game work on the console for now?
->
 
 I hope you don't mind if I digress to ask a design question.
 
@@ -300,7 +298,7 @@ Would it be better to take the perspective of: _Showing the moves for a square i
 
 Yikes! That was long. I owe you a beer for this one.
 
->>Would it be better to have a method `game.squareChosen(square)`, and our particular `Game` implementation is trusted to respond by delivering the available moves for that square?
+> > Would it be better to have a method `game.squareChosen(square)`, and our particular `Game` implementation is trusted to respond by delivering the available moves for that square?
 >
 > You are right on the money. I didn't want to straight out say what you should do because that would be like spoiling a movie by telling you the ending.
 > Better you explore and come to your own conclusion.

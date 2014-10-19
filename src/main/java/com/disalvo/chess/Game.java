@@ -4,9 +4,9 @@ public class Game {
 
 	private final Board board;
 	private final MovesReceiver movesReceiver;
-	private ChessConfiguration chessConfiguration;
+	private final ChessConfiguration chessConfiguration;
 
-	public Game(final Board board, final ChessConfiguration chessConfiguration, MovesReceiver movesReceiver) {
+	public Game(final Board board, final ChessConfiguration chessConfiguration, final MovesReceiver movesReceiver) {
 		this.board = board;
 		this.movesReceiver = movesReceiver;
 		this.chessConfiguration = chessConfiguration;
@@ -19,6 +19,10 @@ public class Game {
 	public void start() {
 		setupBoard();
 		printBoard();
+	}
+	
+	public void submitMove(final Square fromSquare, final Square toSquare) {
+		board.move(fromSquare, toSquare);
 	}
 	
 	private void setupBoard() {

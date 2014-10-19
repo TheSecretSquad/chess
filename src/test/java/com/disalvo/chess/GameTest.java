@@ -47,4 +47,12 @@ public class GameTest {
 		game.start();
 		verify(board).setupAs(chessConfiguration);
 	}
+	
+	@Test
+	public void shouldMovePieceOnBoardWhenMoveSubmitted() {
+		Square from = anySquare();
+		Square to = anySquare();
+		game.submitMove(from, to);
+		verify(board).move(from, to);
+	}
 }

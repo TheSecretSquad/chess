@@ -364,3 +364,26 @@ Do you think I made anything better, or am I just rearranging the deck chairs on
 > used? Don't change this as it will evolve.
 
 > How can we move forward with this project?
+
+<!-- -->
+ 
+> > I'd be inclined to rename ExampleBoardImpl to Simply ChessBoard. The suffix of 'Impl' should be avoided if possible.
+
+The ExampleBoardImpl class was just a quick example of what an implementation might look like. I agree, 'Impl' classes are bad news.
+
+> > Both branches are good but you should choose one.
+
+I was worried about how the changes in the alternate design force the Game tests to change. Changing board.sendMovesForTo to board.chooseSquare causes the Game tests lose all evidence of the feature we were testing. The Game test changes from shouldSendMovesForSquareWhenSquareIsChosen to shouldChooseSquareOnTheBoardWhenSquareIsChosen. If we want to guarantee in a test that the moves are sent to the receiver we would have to write and test an implementation of Board. Is it okay at this point to deviate from Game and start testing and implementing a ChessBoard class?
+
+I will choose one of the branches and continue.
+
+> > It might seem like splitting hairs but you should probably ask the board to setup according to the starting piece configuration rather than the other way around...
+
+I couldn't decide which way made sense, telling the StartingPieceConfiguration to setup the board or telling the board to set itself up with the StartingPieceConfiguration. Can you explain why board.setupAs(chessConfiguration) is better?
+
+> > How can we move forward with this project?
+
+I will think of a next step to move forward. Right now I can think of three options to continue:
+- We can start keeping track of player turns.
+- We can implement submitting moves.
+- We can write tests for bad inputs, null objects, etc.

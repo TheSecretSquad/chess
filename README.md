@@ -385,3 +385,12 @@ I will think of a next step to move forward. Right now I can think of three opti
 - We can start keeping track of player turns.
 - We can implement submitting moves.
 - We can write tests for bad inputs, null objects, etc.
+
+> I wouldnt say that 'Impl' are bad news just that ChessBoard is a better name than anything with Impl at the end :)
+
+> board.setupAs(configuration) is better because in real life we ask someone to follow instructions/map we don't as
+> the instructions/map to apply to the person. However, when you implement setupAs you will almost always have
+a point where board asks the configuration to apply to itself. 
+
+> To move forward how about you have a main in the game class that constructs a chess game and tells the game
+to start resulting in a board being printed to the console? Driven out by tests.

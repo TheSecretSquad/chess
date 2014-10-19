@@ -337,3 +337,30 @@ I pushed a new branch to the repo called alternateDesign so you can see what I'm
 It seemed like the Game class was taking on dependencies and work related more to the Board's job, so I tried to remove some of the dependencies and some of the context in the method calls. The tests were starting to collect a lot of mocks and I thought the Game didn't really require them as dependencies to do its job of coordinating the game. I can provide a more detailed explanation on the reasons behind these changes if needed.
 
 Do you think I made anything better, or am I just rearranging the deck chairs on the Titanic. What do you think about this design?
+
+> I looked at the alternative branch for Chess and it is good.
+> I'd be inclined to rename `ExampleBoardImpl` to Simply `ChessBoard`. The suffix of 'Impl' should be avoided if possible.
+> Sometimes its hard to think of a concrete name that doesn't clash with the Interface name.
+>
+> Both branches are good but you should choose one.
+>
+> In the master branch `Game` class when you start the game you ask the `StartingPieceConfiguration` to setup the board.
+> It might seem like splitting hairs but you should probably ask the board to setup according to the starting piece configuration rather than the other way around:
+
+> ```java
+> public void start() {
+>    setupBoard();
+>    printBoard();
+> }
+
+> private void setupBoard() { board.setupAs(chessConfiguration); }
+> private void printBoard() { board.printToConsole(); }
+> ```
+
+> Note that I have split out the methods too - as it is likely they will be reused later - and renamed the configuration.
+
+> What is worth thinking about here is the 'board configuration'. How likely is it that the 
+> board will be independent enough to the game played on it that a configuration can be 
+> used? Don't change this as it will evolve.
+
+> How can we move forward with this project?

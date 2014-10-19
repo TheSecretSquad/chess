@@ -4,12 +4,12 @@ public class Game {
 
 	private final Board board;
 	private final MovesReceiver movesReceiver;
-	private StartingPieceConfiguration startingPieceConfiguration;
+	private ChessConfiguration chessConfiguration;
 
-	public Game(final Board board, final StartingPieceConfiguration startingPieceConfiguration, MovesReceiver movesReceiver) {
+	public Game(final Board board, final ChessConfiguration chessConfiguration, MovesReceiver movesReceiver) {
 		this.board = board;
 		this.movesReceiver = movesReceiver;
-		this.startingPieceConfiguration = startingPieceConfiguration;
+		this.chessConfiguration = chessConfiguration;
 	}
 
 	public void chooseSquare(final Square square) {
@@ -17,7 +17,15 @@ public class Game {
 	}
 
 	public void start() {
-		startingPieceConfiguration.setup(board);
+		setupBoard();
+		printBoard();
+	}
+	
+	private void setupBoard() {
+		board.setupAs(chessConfiguration);
+	}
+	
+	private void printBoard() {
 		board.printToConsole();
 	}
 }

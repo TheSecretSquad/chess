@@ -1,6 +1,6 @@
 package com.disalvo.chess;
 
-public interface StartingPieceConfiguration {
+public interface ChessConfiguration {
 
 	void setup(final Board board);
 }

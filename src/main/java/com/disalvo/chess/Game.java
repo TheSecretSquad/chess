@@ -21,15 +21,15 @@ public class Game {
 		printBoard();
 	}
 	
-	public void submitMove(final Square fromSquare, final Square toSquare) {
-		board.move(fromSquare, toSquare);
-	}
-	
 	private void setupBoard() {
 		board.setupAs(chessConfiguration);
 	}
 	
 	private void printBoard() {
 		board.printToConsole();
+	}
+	
+	public void submitMove(final Square fromSquare, final Square toSquare) {
+		board.move(fromSquare, toSquare);
 	}
 }

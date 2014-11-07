@@ -9,4 +9,6 @@ public interface Board {
 	void setupAs(final ChessConfiguration chessConfiguration);
 
 	void move(final Square fromSquare, final Square toSquare);
+
+	void placePieceAt(final Piece piece, final Square square);
 }

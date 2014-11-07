@@ -32,4 +32,31 @@ public class Game {
 	public void submitMove(final Square fromSquare, final Square toSquare) {
 		board.move(fromSquare, toSquare);
 	}
+	
+	public static void main(String[] args) {
+		Game game = createDefaultGame();
+		game.start();
+	}
+	
+	private static Game createDefaultGame() {
+		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new DefaultConsole(), new DefaultSquareProvider());
+		return new Game(new ChessBoard(boardConsolePrinter), new StandardChessConfiguration(configurePieceSet()), null);
+	}
+
+	private static PieceSet configurePieceSet() {
+		DefaultPieceSet defaultPieceSet = new DefaultPieceSet();
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.BISHOP, Color.LIGHT, new Bishop(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.BISHOP, Color.DARK, new Bishop(Color.DARK));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.KING, Color.LIGHT, new King(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.KING, Color.DARK, new King(Color.DARK));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.KNIGHT, Color.LIGHT, new Knight(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.KNIGHT, Color.DARK, new Knight(Color.DARK));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.PAWN, Color.LIGHT, new Pawn(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.PAWN, Color.DARK, new Pawn(Color.DARK));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.QUEEN, Color.LIGHT, new Queen(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.QUEEN, Color.DARK, new Queen(Color.DARK));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.ROOK, Color.LIGHT, new Rook(Color.LIGHT));
+		defaultPieceSet.registerPieceTypeOfColorWith(PieceType.ROOK, Color.DARK, new Rook(Color.DARK));
+		return defaultPieceSet;
+	}
 }

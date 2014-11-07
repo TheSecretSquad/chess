@@ -1,7 +1,7 @@
 package com.disalvo.chess;
 
 public enum Square {
-
+	
 	A1(File.A, Rank.ONE),
 	A2(File.A, Rank.TWO),
 	A3(File.A, Rank.THREE),
@@ -66,7 +66,7 @@ public enum Square {
 	H6(File.H, Rank.SIX),
 	H7(File.H, Rank.SEVEN),
 	H8(File.H, Rank.EIGHT);
-
+	
 	private final String position;
 
 	Square(final File file, final Rank rank) {

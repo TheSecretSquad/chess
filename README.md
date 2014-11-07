@@ -398,3 +398,5 @@ to start resulting in a board being printed to the console? Driven out by tests.
 I'll start working on that. What is the reasoning behind this as a next step? I wouldn't have thought to go in that direction.
 
 > Well this approach will make a running piece of software, and this is the only real measure of success. :)
+
+I finally got this thing printing a chess board with a standard chess piece configuration. I added quite a bit of code which makes me a little nervous. I had a lot of trouble figuring out how to test certain aspects because I needed to test that constructors were called with the correct arguments. I couldn't figure out a good way to test constructors, so I feel like some of the interfaces and code exist to make those parts testable (specifically in relation to adding pieces to the board)... Let me know if you have any questions. I can explain my decisions in detail.

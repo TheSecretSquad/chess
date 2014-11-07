@@ -394,3 +394,7 @@ a point where board asks the configuration to apply to itself.
 
 > To move forward how about you have a main in the game class that constructs a chess game and tells the game
 to start resulting in a board being printed to the console? Driven out by tests.
+
+I'll start working on that. What is the reasoning behind this as a next step? I wouldn't have thought to go in that direction.
+
+> Well this approach will make a running piece of software, and this is the only real measure of success. :)

@@ -19,11 +19,6 @@ public class ChessPieceTest {
 	@Before
 	public void setUp() throws Exception {
 		chessPiece = new ChessPiece(PieceType.PAWN, Color.LIGHT) {
-
-			@Override
-			protected ChessPiece newPieceOfColor(Color color) {
-				return null;
-			}
 		};
 	}
 

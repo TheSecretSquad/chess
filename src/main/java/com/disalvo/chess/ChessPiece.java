@@ -1,6 +1,6 @@
 package com.disalvo.chess;
 
-public abstract class ChessPiece implements Piece, PiecePrototype {
+public abstract class ChessPiece implements Piece {
 
 	private final PieceType pieceType;
 	private final Color color;
@@ -14,11 +14,4 @@ public abstract class ChessPiece implements Piece, PiecePrototype {
 	public final void printTo(final Console console) {
 		console.printPieceTypeOfColor(pieceType, color);
 	}
-
-	@Override
-	public void newPieceOnBoardAt(Board board, Square square) {
-		board.placePieceAt(newPieceOfColor(color), square);
-	}
-	
-	protected abstract ChessPiece newPieceOfColor(final Color color);
 }

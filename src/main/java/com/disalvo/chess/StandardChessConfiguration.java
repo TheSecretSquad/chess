@@ -2,10 +2,10 @@ package com.disalvo.chess;
 
 public class StandardChessConfiguration implements ChessConfiguration{
 
-	private final PieceSet pieceSet;
+	private final PieceFactory pieceFactory;
 
-	public StandardChessConfiguration(final PieceSet pieceSet) {
-		this.pieceSet = pieceSet;
+	public StandardChessConfiguration(final PieceFactory pieceFactory) {
+		this.pieceFactory = pieceFactory;
 	}
 	
 	@Override
@@ -23,26 +23,26 @@ public class StandardChessConfiguration implements ChessConfiguration{
 	}
 
 	private void setupLightPawns(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.PAWN, Color.LIGHT, board,
+		placePieceTypeOfColorOnBoardAt(PieceType.PAWN, Color.LIGHT, board,
 				Square.A2, Square.B2, Square.C2, Square.D2,
 				Square.E2, Square.F2, Square.G2, Square.H2);
 	}
 
 	private void setupLightRooks(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.ROOK, Color.LIGHT, board, Square.A1, Square.H1);	
+		placePieceTypeOfColorOnBoardAt(PieceType.ROOK, Color.LIGHT, board, Square.A1, Square.H1);	
 	}
 
 	private void setupLightKnights(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.KNIGHT, Color.LIGHT, board, Square.B1, Square.G1);
+		placePieceTypeOfColorOnBoardAt(PieceType.KNIGHT, Color.LIGHT, board, Square.B1, Square.G1);
 	}
 	
 	private void setupLightBishops(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.BISHOP, Color.LIGHT, board, Square.C1, Square.F1);
+		placePieceTypeOfColorOnBoardAt(PieceType.BISHOP, Color.LIGHT, board, Square.C1, Square.F1);
 	}
 	
 	private void setupLightKingAndQueen(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.KING, Color.LIGHT, board, Square.D1);
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.QUEEN, Color.LIGHT, board, Square.E1);
+		placePieceTypeOfColorOnBoardAt(PieceType.KING, Color.LIGHT, board, Square.D1);
+		placePieceTypeOfColorOnBoardAt(PieceType.QUEEN, Color.LIGHT, board, Square.E1);
 	}
 	
 	private void setupDarkPieces(final Board board) {
@@ -54,25 +54,31 @@ public class StandardChessConfiguration implements ChessConfiguration{
 	}
 
 	private void setupDarkPawns(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.PAWN, Color.DARK, board,
+		placePieceTypeOfColorOnBoardAt(PieceType.PAWN, Color.DARK, board,
 				Square.A7, Square.B7, Square.C7, Square.D7,
 				Square.E7, Square.F7, Square.G7, Square.H7);
 	}
 
 	private void setupDarkRooks(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.ROOK, Color.DARK, board, Square.A8, Square.H8);
+		placePieceTypeOfColorOnBoardAt(PieceType.ROOK, Color.DARK, board, Square.A8, Square.H8);
 	}
 
 	private void setupDarkKnights(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.KNIGHT, Color.DARK, board, Square.B8, Square.G8);
+		placePieceTypeOfColorOnBoardAt(PieceType.KNIGHT, Color.DARK, board, Square.B8, Square.G8);
 	}
 
 	private void setupDarkBishops(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.BISHOP, Color.DARK, board, Square.C8, Square.F8);
+		placePieceTypeOfColorOnBoardAt(PieceType.BISHOP, Color.DARK, board, Square.C8, Square.F8);
 	}
 
 	private void setupDarkKingAndQueen(final Board board) {
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.KING, Color.DARK, board, Square.D8);
-		pieceSet.setupPieceTypeOfColorOnBoardAt(PieceType.QUEEN, Color.DARK, board, Square.E8);
+		placePieceTypeOfColorOnBoardAt(PieceType.KING, Color.DARK, board, Square.D8);
+		placePieceTypeOfColorOnBoardAt(PieceType.QUEEN, Color.DARK, board, Square.E8);
+	}
+	
+	private void placePieceTypeOfColorOnBoardAt(final PieceType pieceType, final Color color, final Board board, final Square ... squares) {
+		for(Square s : squares) {
+			board.placePieceAt(pieceFactory.createPiece(pieceType, color), s);
+		}
 	}
 }

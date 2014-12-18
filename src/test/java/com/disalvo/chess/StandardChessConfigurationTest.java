@@ -1,6 +1,9 @@
 package com.disalvo.chess;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.AdditionalMatchers.not;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,85 +18,105 @@ public class StandardChessConfigurationTest {
 	@Mock
 	private Board board;
 	@Mock
-	private PieceSet pieceSet;
+	private PieceFactory pieceFactory;
+	@Mock
+	private Piece expectedPiece;
+	@Mock
+	private Piece notExpectedPiece;
+
 	
 	@Before
 	public void setUp() throws Exception {
-		standardChessConfiguration = new StandardChessConfiguration(pieceSet);
+		standardChessConfiguration = new StandardChessConfiguration(pieceFactory);
 	}
 
-	private void verifyPiecePlacedUsingPieceSetAt(final PieceType pieceType, final Color color, final Square...squares) {
+	private void setupMockFactoryToExpect(final PieceType pieceType, final Color color) {
+		when(pieceFactory.createPiece(eq(pieceType), eq(color))).thenReturn(expectedPiece);
+		when(pieceFactory.createPiece(not(eq(pieceType)), not(eq(color)))).thenReturn(notExpectedPiece);
+	}
+	
+	private void verifyExpectedPiecePlacedAt(final Square ... squares) {
+		verifyPiecePlacedAt(expectedPiece, squares);
+	}
+	
+	private void verifyPiecePlacedAt(final Piece piece, final Square ... squares) {
 		standardChessConfiguration.setup(board);
-		verify(pieceSet).setupPieceTypeOfColorOnBoardAt(pieceType, color, board, squares);
-	}
-	
-	private void verifyLightPiecePlacedAt(final PieceType pieceType, final Square...squares) {
-		verifyPiecePlacedUsingPieceSetAt(pieceType, Color.LIGHT, squares);
-	}
-	
-	private void verifyDarkPiecePlacedAt(final PieceType pieceType, final Square...squares) {
-		verifyPiecePlacedUsingPieceSetAt(pieceType, Color.DARK, squares);
+		for(Square s : squares) {
+			verify(board).placePieceAt(piece, s);
+		}
 	}
 	
 	@Test
 	public void shouldFillRank2WithLightPawnsWhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.PAWN, Square.A2, Square.B2, Square.C2, Square.D2,
+		setupMockFactoryToExpect(PieceType.PAWN, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.A2, Square.B2, Square.C2, Square.D2,
 				Square.E2, Square.F2, Square.G2, Square.H2);
 	}
 	
 	@Test
 	public void shouldPlaceLightRookAtA1AndH1WhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.ROOK, Square.A1, Square.H1);
+		setupMockFactoryToExpect(PieceType.ROOK, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.A1, Square.H1);
 	}
 	
 	@Test
 	public void shouldPlaceLightKnightAtB1AndG1WhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.KNIGHT, Square.B1, Square.G1);
+		setupMockFactoryToExpect(PieceType.KNIGHT, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.B1, Square.G1);
 	}
 	
 	@Test
 	public void shouldPlaceLightBishopAtC1AndF1WhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.BISHOP, Square.C1, Square.F1);
+		setupMockFactoryToExpect(PieceType.BISHOP, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.C1, Square.F1);
 	}
 	
 	@Test
 	public void shouldPlaceLightKingAtD1WhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.KING, Square.D1);
+		setupMockFactoryToExpect(PieceType.KING, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.D1);
 	}
 	
 	@Test
 	public void shouldPlaceLightQueenAtE1WhenSettingUp() {
-		verifyLightPiecePlacedAt(PieceType.QUEEN, Square.E1);
+		setupMockFactoryToExpect(PieceType.QUEEN, Color.LIGHT);
+		verifyExpectedPiecePlacedAt(Square.E1);
 	}
 	
 	@Test
 	public void shouldFillRank7WithDarkPawnsWhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.PAWN, Square.A7, Square.B7, Square.C7,
+		setupMockFactoryToExpect(PieceType.PAWN, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.A7, Square.B7, Square.C7,
 				Square.D7, Square.E7, Square.F7, Square.G7, Square.H7);
 	}
 	
 	@Test
 	public void shouldPlaceDarkRookAtA8AndH8WhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.ROOK, Square.A8, Square.H8);
+		setupMockFactoryToExpect(PieceType.ROOK, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.A8, Square.H8);
 	}
 	
 	@Test
 	public void shouldPlaceDarkKnightAtB8AndG8WhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.KNIGHT, Square.B8, Square.G8);
+		setupMockFactoryToExpect(PieceType.KNIGHT, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.B8, Square.G8);
 	}
 	
 	@Test
 	public void shouldPlaceDarkBishopAtC8AndF8WhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.BISHOP, Square.C8, Square.F8);
+		setupMockFactoryToExpect(PieceType.BISHOP, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.C8, Square.F8);
 	}
 	
 	@Test
 	public void shouldPlaceDarkKingAtD8WhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.KING, Square.D8);
+		setupMockFactoryToExpect(PieceType.KING, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.D8);
 	}
 	
 	@Test
 	public void shouldPlaceDarkQueenAtE8WhenSettingUp() {
-		verifyDarkPiecePlacedAt(PieceType.QUEEN, Square.E8);
+		setupMockFactoryToExpect(PieceType.QUEEN, Color.DARK);
+		verifyExpectedPiecePlacedAt(Square.E8);
 	}
 }

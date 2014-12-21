@@ -3,7 +3,7 @@ package com.disalvo.chess;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class DefaultConsole implements Console {
+public class UnicodeStringConsole implements Console {
 
 	private static final String verticalBar = "\u2502";
 	private static final String emptyLightSpace = "\u2504\u2504";

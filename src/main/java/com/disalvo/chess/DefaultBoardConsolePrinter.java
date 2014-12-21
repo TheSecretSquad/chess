@@ -33,7 +33,7 @@ public class DefaultBoardConsolePrinter implements BoardConsolePrinter {
 	}
 
 	private void printPiece(final Square square, final PieceProvider pieceProvider) {
-		pieceProvider.providePieceAtSquareTo(square, new PieceConsumer() {
+		pieceProvider.providePieceAtSquareTo(square, new SquarePieceConsumer() {
 
 			@Override
 			public void givePiece(final Piece piece) {

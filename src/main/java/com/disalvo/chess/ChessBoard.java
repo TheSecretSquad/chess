@@ -38,7 +38,7 @@ public class ChessBoard implements Board, PieceProvider {
 	}
 
 	@Override
-	public void providePieceAtSquareTo(Square square, PieceConsumer pieceConsumer) {
+	public void providePieceAtSquareTo(Square square, SquarePieceConsumer pieceConsumer) {
 		Piece piece = pieces.get(square);
 		if(Objects.isNull(piece))
 			pieceConsumer.noPiece();

@@ -39,7 +39,7 @@ public class Game {
 	}
 	
 	private static Game createDefaultGame() {
-		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new DefaultConsole(), new DefaultSquareProvider());
+		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new UnicodeStringConsole(), new DefaultSquareProvider());
 		return new Game(new ChessBoard(boardConsolePrinter), new StandardChessConfiguration(new DefaultPieceFactory()), null);
 	}
 }

@@ -50,7 +50,7 @@ public class DefaultBoardConsolePrinterTest {
 	private PieceProvider makePieceProviderOfAnyPieceAtA1() {
 		return new PieceProvider() {
 			@Override
-			public void providePieceAtSquareTo(final Square square, final PieceConsumer pieceConsumer) {
+			public void providePieceAtSquareTo(final Square square, final SquarePieceConsumer pieceConsumer) {
 				if(square.equals(Square.A1))
 					pieceConsumer.givePiece(piece);
 			}
@@ -60,7 +60,7 @@ public class DefaultBoardConsolePrinterTest {
 	private PieceProvider makePieceProviderOfNoPieces() {
 		return new PieceProvider() {
 			@Override
-			public void providePieceAtSquareTo(final Square square, final PieceConsumer pieceConsumer) {
+			public void providePieceAtSquareTo(final Square square, final SquarePieceConsumer pieceConsumer) {
 				pieceConsumer.noPiece();
 			}
 		};

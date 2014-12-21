@@ -1,6 +1,6 @@
 package com.disalvo.chess;
 
-public interface PieceConsumer {
+public interface SquarePieceConsumer {
 
 	void givePiece(final Piece piece);
 	

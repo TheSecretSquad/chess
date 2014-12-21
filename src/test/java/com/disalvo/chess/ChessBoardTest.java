@@ -20,7 +20,7 @@ public class ChessBoardTest {
 	@Mock
 	private Piece piece;
 	@Mock
-	private PieceConsumer pieceConsumer;
+	private SquarePieceConsumer pieceConsumer;
 	@Mock
 	private ChessConfiguration chessConfiguration;
 	

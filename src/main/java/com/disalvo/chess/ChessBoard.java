@@ -29,7 +29,7 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 	}
 
 	@Override
-	public void move(final Square fromSquare, final Square toSquare) {		
+	public void submitMove(final Square fromSquare, final Square toSquare) {		
 	}
 
 	@Override

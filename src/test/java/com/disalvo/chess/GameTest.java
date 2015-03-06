@@ -49,10 +49,10 @@ public class GameTest {
 	}
 	
 	@Test
-	public void shouldMovePieceOnBoardWhenMoveSubmitted() {
+	public void shouldSubmitMoveToBoardWhenMoveSubmitted() {
 		Square from = anySquare();
 		Square to = anySquare();
 		game.submitMove(from, to);
-		verify(board).move(from, to);
+		verify(board).submitMove(from, to);
 	}
 }

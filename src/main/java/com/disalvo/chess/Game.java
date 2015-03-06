@@ -30,7 +30,7 @@ public class Game {
 	}
 	
 	public void submitMove(final Square fromSquare, final Square toSquare) {
-		board.move(fromSquare, toSquare);
+		board.submitMove(fromSquare, toSquare);
 	}
 	
 	public static void main(String[] args) {

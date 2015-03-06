@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class ChessBoard implements Board, PieceProvider {
+public class ChessBoard implements Board, PieceAtSquareProvider {
 
 	private final BoardConsolePrinter boardConsolePrinter;
 	private final Map<Square, Piece> pieces;
@@ -38,7 +38,7 @@ public class ChessBoard implements Board, PieceProvider {
 	}
 
 	@Override
-	public void providePieceAtSquareTo(Square square, SquarePieceConsumer pieceConsumer) {
+	public void providePieceAtSquareTo(Square square, PieceAtSquareConsumer pieceConsumer) {
 		Piece piece = pieces.get(square);
 		if(Objects.isNull(piece))
 			pieceConsumer.noPiece();

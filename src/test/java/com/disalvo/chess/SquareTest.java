@@ -8,7 +8,7 @@ import org.mockito.Mock;
 public class SquareTest {
 
 	@Mock
-	private SquareRankConsumer squareRankConsumer;
+	private ByRankSquareConsumer squareRankConsumer;
 	
 	@Test
 	public void shouldHaveStringConversionEqualToEnumName() {

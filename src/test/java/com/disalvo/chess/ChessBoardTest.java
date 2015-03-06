@@ -20,7 +20,7 @@ public class ChessBoardTest {
 	@Mock
 	private Piece piece;
 	@Mock
-	private SquarePieceConsumer pieceConsumer;
+	private PieceAtSquareConsumer pieceConsumer;
 	@Mock
 	private ChessConfiguration chessConfiguration;
 	
@@ -32,7 +32,7 @@ public class ChessBoardTest {
 	@Test
 	public void shouldProvidePiecesToConsolePrinterWhenPrintingToConsole() {
 		chessBoard.printToConsole();
-		verify(boardConsoleWriter).printFrom(isA(PieceProvider.class));
+		verify(boardConsoleWriter).printFrom(isA(PieceAtSquareProvider.class));
 	}
 	
 	@Test

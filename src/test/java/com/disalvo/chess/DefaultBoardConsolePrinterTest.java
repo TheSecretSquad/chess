@@ -16,25 +16,25 @@ public class DefaultBoardConsolePrinterTest {
 	@Mock
 	private Console console;
 	@Mock
-	private SquareProvider squareProvider;
+	private ReverseRankSquareProvider squareProvider;
 	@Mock
-	private PieceProvider pieceProvider;
+	private PieceAtSquareProvider pieceProvider;
 	@Mock
 	private Piece piece;
 	
-	private SquareProvider makeSquareProviderOfA1() {
-		return new SquareProvider() {
+	private ReverseRankSquareProvider makeSquareProviderOfA1() {
+		return new ReverseRankSquareProvider() {
 			@Override
-			public void provideRanksInReverseTo(final SquareRankConsumer squareRankConsumer) {
+			public void provideSquaresTo(final ByRankSquareConsumer squareRankConsumer) {
 				squareRankConsumer.giveSquare(Square.A1);
 			}
 		};
 	}
 	
-	private SquareProvider makeSquareProviderOfFirstRank() {
-		return new SquareProvider() {
+	private ReverseRankSquareProvider makeSquareProviderOfFirstRank() {
+		return new ReverseRankSquareProvider() {
 			@Override
-			public void provideRanksInReverseTo(final SquareRankConsumer squareRankConsumer) {
+			public void provideSquaresTo(final ByRankSquareConsumer squareRankConsumer) {
 				squareRankConsumer.giveSquare(Square.A1);
 				squareRankConsumer.giveSquare(Square.B1);
 				squareRankConsumer.giveSquare(Square.C1);
@@ -47,20 +47,20 @@ public class DefaultBoardConsolePrinterTest {
 		};
 	}
 	
-	private PieceProvider makePieceProviderOfAnyPieceAtA1() {
-		return new PieceProvider() {
+	private PieceAtSquareProvider makePieceProviderOfAnyPieceAtA1() {
+		return new PieceAtSquareProvider() {
 			@Override
-			public void providePieceAtSquareTo(final Square square, final SquarePieceConsumer pieceConsumer) {
+			public void providePieceAtSquareTo(final Square square, final PieceAtSquareConsumer pieceConsumer) {
 				if(square.equals(Square.A1))
 					pieceConsumer.givePiece(piece);
 			}
 		};
 	}
 	
-	private PieceProvider makePieceProviderOfNoPieces() {
-		return new PieceProvider() {
+	private PieceAtSquareProvider makePieceProviderOfNoPieces() {
+		return new PieceAtSquareProvider() {
 			@Override
-			public void providePieceAtSquareTo(final Square square, final SquarePieceConsumer pieceConsumer) {
+			public void providePieceAtSquareTo(final Square square, final PieceAtSquareConsumer pieceConsumer) {
 				pieceConsumer.noPiece();
 			}
 		};
@@ -79,7 +79,7 @@ public class DefaultBoardConsolePrinterTest {
 	@Test
 	public void shouldProvideSquaresInReverseRankOrderToSquarePrinterWhenPrinting() {
 		defaultBoardConsolePrinter.printFrom(pieceProvider);
-		verify(squareProvider).provideRanksInReverseTo(isA(SquareRankConsumer.class));
+		verify(squareProvider).provideSquaresTo(isA(ByRankSquareConsumer.class));
 	}
 	
 	@Test

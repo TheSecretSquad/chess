@@ -15,14 +15,14 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultSquareProviderTest {
+public class DefaultReverseRankSquareProviderTest {
 
-	private DefaultSquareProvider squareProvider;
+	private DefaultReverseRankSquareProvider squareProvider;
 	@Mock
-	private SquareRankConsumer squareRankConsumer;
+	private ByRankSquareConsumer squareRankConsumer;
 	private OrderedResultsSquareRankConsumer orderedResultsSquareRankConsumer = new OrderedResultsSquareRankConsumer();
 	
-	private static class OrderedResultsSquareRankConsumer implements SquareRankConsumer {
+	private static class OrderedResultsSquareRankConsumer implements ByRankSquareConsumer {
 		private final List<Square> resultList = new ArrayList<>();
 
 		@Override
@@ -47,24 +47,24 @@ public class DefaultSquareProviderTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		squareProvider = new DefaultSquareProvider();
+		squareProvider = new DefaultReverseRankSquareProvider();
 	}
 
 	@Test
 	public void shouldConsumeSquaresInFileOrderWhenProvidingSquares() {
-		squareProvider.provideRanksInReverseTo(orderedResultsSquareRankConsumer);
+		squareProvider.provideSquaresTo(orderedResultsSquareRankConsumer);
 		verifySquaresConsumedInOrder();
 	}
 	
 	@Test
 	public void shouldConsume64SquaresWhenProvidingRanks() {
-		squareProvider.provideRanksInReverseTo(squareRankConsumer);
+		squareProvider.provideSquaresTo(squareRankConsumer);
 		verify(squareRankConsumer, times(64)).giveSquare(any(Square.class));
 	}
 	
 	@Test
 	public void shouldReport8EndRanksWhenProvidingRanks() {
-		squareProvider.provideRanksInReverseTo(squareRankConsumer);
+		squareProvider.provideSquaresTo(squareRankConsumer);
 		verify(squareRankConsumer, times(8)).endRank();
 	}
 }

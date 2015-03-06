@@ -1,6 +1,6 @@
 package com.disalvo.chess;
 
-public interface SquareRankConsumer {
+public interface ByRankSquareConsumer {
 	
 	void giveSquare(final Square square);
 	

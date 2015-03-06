@@ -3,17 +3,17 @@ package com.disalvo.chess;
 public class DefaultBoardConsolePrinter implements BoardConsolePrinter {
 
 	private final Console console;
-	private final SquareProvider squareProvider;
+	private final ReverseRankSquareProvider squareProvider;
 	private boolean isLightSquare = true;
 	
-	public DefaultBoardConsolePrinter(final Console console, final SquareProvider squareProvider) {
+	public DefaultBoardConsolePrinter(final Console console, final ReverseRankSquareProvider squareProvider) {
 		this.console = console;
 		this.squareProvider = squareProvider;
 	}
 	
 	@Override
-	public void printFrom(final PieceProvider pieceProvider) {
-		squareProvider.provideRanksInReverseTo(new SquareRankConsumer() {
+	public void printFrom(final PieceAtSquareProvider pieceProvider) {
+		squareProvider.provideSquaresTo(new ByRankSquareConsumer() {
 
 			@Override
 			public void giveSquare(final Square square) {
@@ -27,13 +27,13 @@ public class DefaultBoardConsolePrinter implements BoardConsolePrinter {
 		});
 	}
 	
-	private void printSquareContent(final Square square, final PieceProvider pieceProvider) {
+	private void printSquareContent(final Square square, final PieceAtSquareProvider pieceProvider) {
 		printPiece(square, pieceProvider);
 		trackSquareColor();
 	}
 
-	private void printPiece(final Square square, final PieceProvider pieceProvider) {
-		pieceProvider.providePieceAtSquareTo(square, new SquarePieceConsumer() {
+	private void printPiece(final Square square, final PieceAtSquareProvider pieceProvider) {
+		pieceProvider.providePieceAtSquareTo(square, new PieceAtSquareConsumer() {
 
 			@Override
 			public void givePiece(final Piece piece) {

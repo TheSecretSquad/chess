@@ -2,5 +2,5 @@ package com.disalvo.chess;
 
 public interface BoardConsolePrinter {
 
-	void printFrom(final PieceProvider pieceProvider);
+	void printFrom(final PieceAtSquareProvider pieceProvider);
 }

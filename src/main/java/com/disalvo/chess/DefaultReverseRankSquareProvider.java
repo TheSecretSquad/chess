@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class DefaultSquareProvider implements SquareProvider {
+public class DefaultReverseRankSquareProvider implements ReverseRankSquareProvider {
 
 	private List<Square> reverseRankArrangement = new ArrayList<>();
 
-	public DefaultSquareProvider() {
+	public DefaultReverseRankSquareProvider() {
 		reverseRankArrangement.add(Square.A8); reverseRankArrangement.add(Square.B8); reverseRankArrangement.add(Square.C8);
 		reverseRankArrangement.add(Square.D8); reverseRankArrangement.add(Square.E8); reverseRankArrangement.add(Square.F8);
 		reverseRankArrangement.add(Square.G8); reverseRankArrangement.add(Square.H8);
@@ -35,13 +35,13 @@ public class DefaultSquareProvider implements SquareProvider {
 		reverseRankArrangement.add(Square.G1); reverseRankArrangement.add(Square.H1);
 	}
 	
-	public void provideRanksInReverseTo(final SquareRankConsumer squareRankConsumer) {
+	public void provideSquaresTo(final ByRankSquareConsumer squareRankConsumer) {
 		IntStream.rangeClosed(1, 64).forEachOrdered((int squareNumber) -> {
 			provideSquareTo(squareRankConsumer, squareNumber);
 		});
 	}
 
-	private void provideSquareTo(final SquareRankConsumer squareRankConsumer, final int squareNumber) {
+	private void provideSquareTo(final ByRankSquareConsumer squareRankConsumer, final int squareNumber) {
 		squareRankConsumer.giveSquare(square(squareNumber));
 		if(isRankEnd(squareNumber))
 			squareRankConsumer.endRank();

@@ -31,9 +31,9 @@ public class GameTest {
 	}
 
 	@Test
-	public void shouldSendMovesForSquareWhenSquareIsChosen() {
+	public void shouldChooseSquareOnBoardWhenSquareIsChosen() {
 		game.chooseSquare(square);
-		verify(board).sendMovesForTo(square, movesReceiver);
+		verify(board).chooseSquare(square);
 	}
 
 	@Test

@@ -17,45 +17,45 @@ public class DefaultPieceFactoryTest {
 		this.pieceFactory = new DefaultPieceFactory();
 	}
 
-	private void assertFactoryCreatesPieceType(PieceType pieceType, Class<?> clazz) {
+	private void assertFactoryCreatesPieceType(ChessPieceType pieceType, Class<?> clazz) {
 		Piece piece = pieceFactory.createPiece(pieceType, anyColor);
 		assertThat(piece, instanceOf(clazz));
 	}
 	
 	@Test
 	public void shouldReturnNewPawnWhenCreatingPawnType() {
-		assertFactoryCreatesPieceType(PieceType.PAWN, Pawn.class);
+		assertFactoryCreatesPieceType(ChessPieceType.PAWN, Pawn.class);
 	}
 	
 	@Test
 	public void shouldReturnNewRookWhenCreatingRookType() {
-		assertFactoryCreatesPieceType(PieceType.ROOK, Rook.class);
+		assertFactoryCreatesPieceType(ChessPieceType.ROOK, Rook.class);
 	}
 	
 	@Test
 	public void shouldReturnNewKingWhenCreatingKingType() {
-		assertFactoryCreatesPieceType(PieceType.KING, King.class);
+		assertFactoryCreatesPieceType(ChessPieceType.KING, King.class);
 	}
 	
 	@Test
 	public void shouldReturnNewQueenWhenCreatingQueenType() {
-		assertFactoryCreatesPieceType(PieceType.QUEEN, Queen.class);
+		assertFactoryCreatesPieceType(ChessPieceType.QUEEN, Queen.class);
 	}
 	
 	@Test
 	public void shouldReturnNewKnightWhenCreatingKnightType() {
-		assertFactoryCreatesPieceType(PieceType.KNIGHT, Knight.class);
+		assertFactoryCreatesPieceType(ChessPieceType.KNIGHT, Knight.class);
 	}
 	
 	@Test
 	public void shouldReturnNewBishopWhenCreatingBishopType() {
-		assertFactoryCreatesPieceType(PieceType.BISHOP, Bishop.class);
+		assertFactoryCreatesPieceType(ChessPieceType.BISHOP, Bishop.class);
 	}
 	
 	@Test
 	public void shouldReturnNewObjectsWhenMultipleCallsForSameType() {
-		Piece p = pieceFactory.createPiece(PieceType.PAWN, Color.LIGHT);
-		Piece p2 = pieceFactory.createPiece(PieceType.PAWN, Color.LIGHT);
+		Piece p = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT);
+		Piece p2 = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT);
 		assertNotSame(p, p2);
 	}
 	

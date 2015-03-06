@@ -23,10 +23,12 @@ public class ChessBoardTest {
 	private PieceAtSquareConsumer pieceConsumer;
 	@Mock
 	private ChessConfiguration chessConfiguration;
+	@Mock
+	private MovesReceiver movesReceiver;
 	
 	@Before
 	public void setUp() throws Exception {
-		chessBoard = new ChessBoard(boardConsoleWriter);
+		chessBoard = new ChessBoard(boardConsoleWriter, movesReceiver);
 	}
 	
 	@Test
@@ -54,5 +56,12 @@ public class ChessBoardTest {
 	public void shouldSetupWithChessConfigurationWhenSettingUp() {
 		chessBoard.setupAs(chessConfiguration);
 		verify(chessConfiguration).setup(chessBoard);
+	}
+	
+	@Test
+	public void shouldSendMovesForPieceAtSquareWhenSquareChosen() {
+		chessBoard.placePieceAt(piece, Square.A1);
+		chessBoard.chooseSquare(Square.A1);
+		verify(piece).targetFromSquareWith(Square.A1, movesReceiver);
 	}
 }

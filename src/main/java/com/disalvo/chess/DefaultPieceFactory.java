@@ -3,7 +3,7 @@ package com.disalvo.chess;
 public class DefaultPieceFactory implements PieceFactory {
 
 	@Override
-	public Piece createPiece(final PieceType pieceType, final Color color) {
+	public Piece createPiece(final ChessPieceType pieceType, final Color color) {
 		if(pieceType == null) throw new UnknownPieceTypeException();
 		
 		switch(pieceType) {

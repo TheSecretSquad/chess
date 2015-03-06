@@ -2,7 +2,7 @@ package com.disalvo.chess;
 
 public interface Console {
 
-	void printPieceTypeOfColor(final PieceType pieceType, final Color color);
+	void printPieceTypeOfColor(final ChessPieceType pieceType, final Color color);
 	
 	void printEmptyLightSquare();
 	

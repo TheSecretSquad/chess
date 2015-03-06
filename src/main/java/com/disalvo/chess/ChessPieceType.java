@@ -1,6 +1,6 @@
 package com.disalvo.chess;
 
-public enum PieceType {
+public enum ChessPieceType {
 	BISHOP,
 	KING,
 	KNIGHT,

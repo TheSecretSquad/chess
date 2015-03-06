@@ -18,13 +18,18 @@ public class ChessPieceTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		chessPiece = new ChessPiece(PieceType.PAWN, Color.LIGHT) {
+		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT) {
+
+			@Override
+			public void targetFromSquareWith(Square originSquare, MovesReceiver movesReceiver) {
+				// Abstract method tested in derived types
+			}
 		};
 	}
 
 	@Test
 	public void shouldPrintWithGivenPieceTypeAndColorWhenPrintingToConsole() {
 		chessPiece.printTo(console);
-		verify(console).printPieceTypeOfColor(PieceType.PAWN, Color.LIGHT);
+		verify(console).printPieceTypeOfColor(ChessPieceType.PAWN, Color.LIGHT);
 	}
 }

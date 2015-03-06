@@ -13,7 +13,7 @@ public class Game {
 	}
 
 	public void chooseSquare(final Square square) {
-		board.sendMovesForTo(square, movesReceiver);
+		board.chooseSquare(square);
 	}
 
 	public void start() {
@@ -40,6 +40,7 @@ public class Game {
 	
 	private static Game createDefaultGame() {
 		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new UnicodeStringConsole(), new DefaultReverseRankSquareProvider());
-		return new Game(new ChessBoard(boardConsolePrinter), new StandardChessConfiguration(new DefaultPieceFactory()), null);
+		// TODO: Add real MovesReceiver
+		return new Game(new ChessBoard(boardConsolePrinter, new MovesReceiver() {}), new StandardChessConfiguration(new DefaultPieceFactory()), null);
 	}
 }

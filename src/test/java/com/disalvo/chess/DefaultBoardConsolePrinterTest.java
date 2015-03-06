@@ -77,7 +77,7 @@ public class DefaultBoardConsolePrinterTest {
 	}
 
 	@Test
-	public void shouldProvideSquaresInReverseRankOrderToSquarePrinterWhenPrinting() {
+	public void shouldProvideSquaresToSquareConsumerWhenPrinting() {
 		defaultBoardConsolePrinter.printFrom(pieceProvider);
 		verify(squareProvider).provideSquaresTo(isA(ByRankSquareConsumer.class));
 	}

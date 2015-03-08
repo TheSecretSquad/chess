@@ -34,7 +34,7 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 	}
 
 	@Override
-	public void setupAs(final ChessConfiguration chessConfiguration) {	
+	public void configureAs(final ChessConfiguration chessConfiguration) {	
 		chessConfiguration.setup(this);
 	}
 

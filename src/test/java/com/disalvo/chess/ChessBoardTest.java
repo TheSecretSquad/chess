@@ -54,12 +54,12 @@ public class ChessBoardTest {
 	
 	@Test
 	public void shouldSetupWithChessConfigurationWhenSettingUp() {
-		chessBoard.setupAs(chessConfiguration);
+		chessBoard.configureAs(chessConfiguration);
 		verify(chessConfiguration).setup(chessBoard);
 	}
 	
 	@Test
-	public void shouldSendMovesForPieceAtSquareWhenSquareChosen() {
+	public void shouldTargetPieceMovesFromSquareWhenSquareChosen() {
 		chessBoard.placePieceAt(piece, Square.A1);
 		chessBoard.chooseSquare(Square.A1);
 		verify(piece).targetFromSquareWith(Square.A1, movesReceiver);

@@ -1,9 +1,10 @@
 package com.disalvo.chess;
 
+import static org.mockito.AdditionalMatchers.not;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.AdditionalMatchers.not;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +32,8 @@ public class StandardChessConfigurationTest {
 	}
 
 	private void setupMockFactoryToExpect(final ChessPieceType pieceType, final Color color) {
-		when(pieceFactory.createPiece(eq(pieceType), eq(color))).thenReturn(expectedPiece);
-		when(pieceFactory.createPiece(not(eq(pieceType)), not(eq(color)))).thenReturn(notExpectedPiece);
+		when(pieceFactory.createPiece(eq(pieceType), eq(color), any(PieceTargetting.class))).thenReturn(expectedPiece);
+		when(pieceFactory.createPiece(not(eq(pieceType)), not(eq(color)), any(PieceTargetting.class))).thenReturn(notExpectedPiece);
 	}
 	
 	private void verifyExpectedPiecePlacedAt(final Square ... squares) {

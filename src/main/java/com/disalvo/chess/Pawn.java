@@ -2,12 +2,12 @@ package com.disalvo.chess;
 
 public class Pawn extends ChessPiece {
 
-	public Pawn(final Color color) {
-		super(ChessPieceType.PAWN, color);
+	public Pawn(final Color color, final PieceTargetting pieceTargetting) {
+		super(ChessPieceType.PAWN, color, pieceTargetting);
 	}
 
 	@Override
-	public void targetFromSquareWith(final Square originSquare, final MovesReceiver movesReceiver) {
-		// TODO Auto-generated method stub
+	protected void targetSteps(final StepSelector stepSelector) {
+		stepSelector.forward();
 	}
 }

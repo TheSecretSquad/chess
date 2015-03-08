@@ -2,5 +2,5 @@ package com.disalvo.chess;
 
 public interface ChessConfiguration {
 
-	void setup(final Board board);
+	void setup(final BoardSetup boardSetup);
 }

@@ -1,14 +1,12 @@
 package com.disalvo.chess;
 
-public interface Board {
+public interface Board extends BoardSetup {
 
 	void chooseSquare(final Square square);
 
 	void printToConsole();
 	
-	void setupAs(final ChessConfiguration chessConfiguration);
+	void configureAs(final ChessConfiguration chessConfiguration);
 
 	void submitMove(final Square fromSquare, final Square toSquare);
-
-	void placePieceAt(final Piece piece, final Square square);
 }

@@ -14,8 +14,6 @@ public class GameTest {
 	private Game game;
 	private Square square;
 	@Mock
-	private MovesReceiver movesReceiver;
-	@Mock
 	private Board board;
 	@Mock
 	private ChessConfiguration chessConfiguration;
@@ -23,7 +21,7 @@ public class GameTest {
 	@Before
 	public void setUp() throws Exception {
 		square = anySquare();
-		game = new Game(board, chessConfiguration, movesReceiver);
+		game = new Game(board, chessConfiguration);
 	}
 
 	private Square anySquare() {
@@ -43,9 +41,9 @@ public class GameTest {
 	}
 	
 	@Test
-	public void shouldSetupPiecesOnTheBoardWhenStarted() {
+	public void shouldConfigurePiecesOnTheBoardWhenStarted() {
 		game.start();
-		verify(board).setupAs(chessConfiguration);
+		verify(board).configureAs(chessConfiguration);
 	}
 	
 	@Test

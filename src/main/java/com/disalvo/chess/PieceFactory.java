@@ -1,6 +1,16 @@
 package com.disalvo.chess;
 
-public interface PieceFactory {
+public abstract class PieceFactory {
 
-	Piece createPiece(final ChessPieceType pieceType, final Color color);
+	private PieceTargetting pieceTargetting;
+	
+	public PieceFactory(final PieceTargetting pieceTargetting) {
+		this.pieceTargetting = pieceTargetting;
+	}
+	
+	public final Piece createPiece(final ChessPieceType pieceType, final Color color) {
+		return createPiece(pieceType, color, pieceTargetting);
+	}
+	
+	protected abstract Piece createPiece(final ChessPieceType pieceType, final Color color, final PieceTargetting pieceTargetting);
 }

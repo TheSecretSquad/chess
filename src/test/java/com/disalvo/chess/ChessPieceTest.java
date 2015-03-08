@@ -15,14 +15,19 @@ public class ChessPieceTest {
 	private Console console;
 	@Mock
 	private Board board;
+	@Mock
+	private MovesReceiver movesReceiver;
+	@Mock
+	private PieceTargetting pieceTargetting;
 	
 	@Before
 	public void setUp() throws Exception {
-		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT) {
+		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT, pieceTargetting) {
 
 			@Override
-			public void targetFromSquareWith(Square originSquare, MovesReceiver movesReceiver) {
-				// Abstract method tested in derived types
+			protected void targetSteps(StepSelector stepSelector) {
+				// TODO Auto-generated method stub
+				
 			}
 		};
 	}

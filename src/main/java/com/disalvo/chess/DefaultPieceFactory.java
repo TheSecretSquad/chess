@@ -1,24 +1,28 @@
 package com.disalvo.chess;
 
-public class DefaultPieceFactory implements PieceFactory {
+public class DefaultPieceFactory extends PieceFactory {
+
+	public DefaultPieceFactory(PieceTargetting pieceTargetting) {
+		super(pieceTargetting);
+	}
 
 	@Override
-	public Piece createPiece(final ChessPieceType pieceType, final Color color) {
+	public Piece createPiece(final ChessPieceType pieceType, final Color color, final PieceTargetting pieceTargetting) {
 		if(pieceType == null) throw new UnknownPieceTypeException();
 		
 		switch(pieceType) {
 			case BISHOP:
-				return new Bishop(color);
+				return new Bishop(color, pieceTargetting);
 			case KING:
-				return new King(color);
+				return new King(color, pieceTargetting);
 			case KNIGHT:
-				return new Knight(color);
+				return new Knight(color, pieceTargetting);
 			case PAWN:
-				return new Pawn(color);
+				return new Pawn(color, pieceTargetting);
 			case QUEEN:
-				return new Queen(color);
+				return new Queen(color, pieceTargetting);
 			case ROOK:
-				return new Rook(color);
+				return new Rook(color, pieceTargetting);
 			default:
 				throw new UnknownPieceTypeException();
 		}

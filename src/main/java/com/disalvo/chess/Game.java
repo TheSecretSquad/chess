@@ -3,12 +3,10 @@ package com.disalvo.chess;
 public class Game {
 
 	private final Board board;
-	private final MovesReceiver movesReceiver;
 	private final ChessConfiguration chessConfiguration;
 
-	public Game(final Board board, final ChessConfiguration chessConfiguration, final MovesReceiver movesReceiver) {
+	public Game(final Board board, final ChessConfiguration chessConfiguration) {
 		this.board = board;
-		this.movesReceiver = movesReceiver;
 		this.chessConfiguration = chessConfiguration;
 	}
 
@@ -22,7 +20,7 @@ public class Game {
 	}
 	
 	private void setupBoard() {
-		board.setupAs(chessConfiguration);
+		board.configureAs(chessConfiguration);
 	}
 	
 	private void printBoard() {
@@ -40,7 +38,21 @@ public class Game {
 	
 	private static Game createDefaultGame() {
 		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new UnicodeStringConsole(), new DefaultReverseRankSquareProvider());
-		// TODO: Add real MovesReceiver
-		return new Game(new ChessBoard(boardConsolePrinter, new MovesReceiver() {}), new StandardChessConfiguration(new DefaultPieceFactory()), null);
+		return new Game(new ChessBoard(boardConsolePrinter, movesReceiver()), new StandardChessConfiguration(new DefaultPieceFactory(pieceTargetting())));
+	}
+	
+	private static PieceTargetting pieceTargetting() {
+		return new PieceTargetting() {
+
+			@Override
+			public void targetForwardFromSquareAsColorWith(Square originSquare,
+					Color color, MovesReceiver movesReceiver) {
+				// TODO Auto-generated method stub
+			}
+		};
+	}
+	
+	private static MovesReceiver movesReceiver() {
+		return null;
 	}
 }

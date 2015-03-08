@@ -2,12 +2,13 @@ package com.disalvo.chess;
 
 public class King extends ChessPiece {
 
-	public King(final Color color) {
-		super(ChessPieceType.KING, color);
+	public King(final Color color, final PieceTargetting pieceTargetting) {
+		super(ChessPieceType.KING, color, pieceTargetting);
 	}
 
 	@Override
-	public void targetFromSquareWith(final Square originSquare, final MovesReceiver movesReceiver) {
+	protected void targetSteps(StepSelector stepSelector) {
 		// TODO Auto-generated method stub
+		
 	}
 }

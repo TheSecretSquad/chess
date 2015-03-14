@@ -21,10 +21,4 @@ public class PawnTest {
 	public void setUp() throws Exception {
 		pawn = new Pawn(Color.LIGHT, pieceTargetting);
 	}
-
-	@Test
-	public void targetsEmptySpaceForwardWhenTargetingFromSquare() {
-		pawn.targetFromSquareWith(Square.D2, movesReceiver);
-		verify(pieceTargetting).targetForwardFromSquareAsColorWith(Square.D2, Color.LIGHT, movesReceiver);
-	}
 }

@@ -7,7 +7,8 @@ public class King extends ChessPiece {
 	}
 
 	@Override
-	protected void targetSteps(StepSelector stepSelector) {
+	protected void targetFromSquareWithReceiverUsing(
+			final Square originSquare, final MovesReceiver movesReceiver, final PieceTargetting pieceTargetting) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -7,7 +7,7 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	protected void targetSteps(final StepSelector stepSelector) {
-		stepSelector.forward();
+	protected void targetFromSquareWithReceiverUsing(
+			final Square originSquare, final MovesReceiver movesReceiver, final PieceTargetting pieceTargetting) {		
 	}
 }

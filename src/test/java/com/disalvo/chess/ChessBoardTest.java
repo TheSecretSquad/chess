@@ -62,6 +62,6 @@ public class ChessBoardTest {
 	public void shouldTargetPieceMovesFromSquareWhenSquareChosen() {
 		chessBoard.placePieceAt(piece, Square.A1);
 		chessBoard.chooseSquare(Square.A1);
-		verify(piece).targetFromSquareWith(Square.A1, movesReceiver);
+		verify(piece).targetFromSquareTo(Square.A1, movesReceiver);
 	}
 }

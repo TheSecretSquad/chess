@@ -1,8 +1,8 @@
 package com.disalvo.chess;
 
-public interface Piece {
+public interface Piece extends TargetSource {
 
 	void printTo(final Console console);
 
-	void targetFromSquareWith(final Square originSquare, final MovesReceiver movesReceiver);
+	void targetFromSquareTo(final Square originSquare, final MovesReceiver movesReceiver);
 }

@@ -18,15 +18,10 @@ public abstract class ChessPiece implements Piece {
 	}
 
 	@Override
-	public final void targetFromSquareWith(final Square originSquare, final MovesReceiver movesReceiver) {
-		targetSteps(new StepSelector() {
-
-			@Override
-			public void forward() {
-				pieceTargetting.targetForwardFromSquareAsColorWith(originSquare, color, movesReceiver);
-			}
-		});
+	public final void targetFromSquareTo(final Square originSquare, final MovesReceiver movesReceiver) {
+		targetFromSquareWithReceiverUsing(originSquare, movesReceiver, pieceTargetting);
 	}
-	
-	protected abstract void targetSteps(final StepSelector stepSelector);
+
+	protected abstract void targetFromSquareWithReceiverUsing(
+			final Square originSquare, final MovesReceiver movesReceiver, final PieceTargetting pieceTargetting);
 }

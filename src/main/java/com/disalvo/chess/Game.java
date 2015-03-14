@@ -45,9 +45,11 @@ public class Game {
 		return new PieceTargetting() {
 
 			@Override
-			public void targetForwardFromSquareAsColorWith(Square originSquare,
-					Color color, MovesReceiver movesReceiver) {
+			public void targetForwardFromSquareWithTargetSourceTo(
+					Square originSquare, TargetSource targetSource,
+					MovesReceiver movesReceiver) {
 				// TODO Auto-generated method stub
+				
 			}
 		};
 	}

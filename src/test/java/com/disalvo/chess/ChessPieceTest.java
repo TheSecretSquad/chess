@@ -25,7 +25,9 @@ public class ChessPieceTest {
 		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT, pieceTargetting) {
 
 			@Override
-			protected void targetSteps(StepSelector stepSelector) {
+			protected void targetFromSquareWithReceiverUsing(
+					Square originSquare, MovesReceiver movesReceiver,
+					PieceTargetting pieceTargetting) {
 				// TODO Auto-generated method stub
 				
 			}

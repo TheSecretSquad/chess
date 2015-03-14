@@ -6,6 +6,7 @@ public class DefaultPieceFactory extends PieceFactory {
 		super(pieceTargetting);
 	}
 
+	// TODO: Remove PieceTargetting parameter 
 	@Override
 	public Piece createPiece(final ChessPieceType pieceType, final Color color, final PieceTargetting pieceTargetting) {
 		if(pieceType == null) throw new UnknownPieceTypeException();

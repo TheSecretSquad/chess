@@ -11,13 +11,11 @@ public class DefaultPieceFactoryTest {
 
 	private PieceFactory pieceFactory;
 	private Color anyColor;
-	@Mock
-	private PieceTargetting pieceTargetting;
 	
 	@Before
 	public void setUp() throws Exception {
 		anyColor = Color.LIGHT;
-		this.pieceFactory = new DefaultPieceFactory(pieceTargetting);
+		this.pieceFactory = new DefaultPieceFactory();
 	}
 
 	private void assertFactoryCreatesPieceType(ChessPieceType pieceType, Class<?> clazz) {
@@ -57,13 +55,13 @@ public class DefaultPieceFactoryTest {
 	
 	@Test
 	public void shouldReturnNewObjectsWhenMultipleCallsForSameType() {
-		Piece p = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT, pieceTargetting);
-		Piece p2 = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT, pieceTargetting);
+		Piece p = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT);
+		Piece p2 = pieceFactory.createPiece(ChessPieceType.PAWN, Color.LIGHT);
 		assertNotSame(p, p2);
 	}
 	
 	@Test(expected=UnknownPieceTypeException.class)
 	public void shouldThrowExceptionWhenNullPieceTypeGiven() {
-		pieceFactory.createPiece(null, anyColor, pieceTargetting);
+		pieceFactory.createPiece(null, anyColor);
 	}
 }

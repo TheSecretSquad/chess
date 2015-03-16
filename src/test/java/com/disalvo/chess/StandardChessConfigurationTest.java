@@ -32,8 +32,8 @@ public class StandardChessConfigurationTest {
 	}
 
 	private void setupMockFactoryToExpect(final ChessPieceType pieceType, final Color color) {
-		when(pieceFactory.createPiece(eq(pieceType), eq(color), any(PieceTargetting.class))).thenReturn(expectedPiece);
-		when(pieceFactory.createPiece(not(eq(pieceType)), not(eq(color)), any(PieceTargetting.class))).thenReturn(notExpectedPiece);
+		when(pieceFactory.createPiece(eq(pieceType), eq(color))).thenReturn(expectedPiece);
+		when(pieceFactory.createPiece(not(eq(pieceType)), not(eq(color)))).thenReturn(notExpectedPiece);
 	}
 	
 	private void verifyExpectedPiecePlacedAt(final Square ... squares) {

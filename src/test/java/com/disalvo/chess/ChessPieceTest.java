@@ -22,12 +22,9 @@ public class ChessPieceTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT, pieceTargetting) {
-
+		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT) {
 			@Override
-			protected void targetFromSquareWithReceiverUsing(
-					Square originSquare, MovesReceiver movesReceiver,
-					PieceTargetting pieceTargetting) {
+			public void choose(PieceTargetting pieceTargetting) {
 				// TODO Auto-generated method stub
 				
 			}

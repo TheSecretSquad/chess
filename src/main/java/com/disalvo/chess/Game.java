@@ -38,23 +38,14 @@ public class Game {
 	
 	private static Game createDefaultGame() {
 		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new UnicodeStringConsole(), new DefaultReverseRankSquareProvider());
-		return new Game(new ChessBoard(boardConsolePrinter, movesReceiver()), new StandardChessConfiguration(new DefaultPieceFactory(pieceTargetting())));
+		return new Game(new ChessBoard(boardConsolePrinter, movesReceiver(), pieceChoiceContextFactory()), new StandardChessConfiguration(new DefaultPieceFactory()));
 	}
-	
-	private static PieceTargetting pieceTargetting() {
-		return new PieceTargetting() {
-
-			@Override
-			public void targetForwardFromSquareWithTargetSourceTo(
-					Square originSquare, TargetSource targetSource,
-					MovesReceiver movesReceiver) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
-	}
-	
+		
 	private static MovesReceiver movesReceiver() {
+		return null;
+	}
+	
+	private static PieceChoiceContextFactory pieceChoiceContextFactory() {
 		return null;
 	}
 }

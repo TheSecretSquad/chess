@@ -19,6 +19,12 @@ public class PawnTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		pawn = new Pawn(Color.LIGHT, pieceTargetting);
+		pawn = new Pawn(Color.LIGHT);
+	}
+	
+	@Test
+	public void shouldTargetOneForwardWhenChosen() {
+		pawn.choose(pieceTargetting);
+		verify(pieceTargetting).forward();
 	}
 }

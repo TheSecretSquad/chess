@@ -9,23 +9,26 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 	private final BoardConsolePrinter boardConsolePrinter;
 	private final MovesReceiver movesReceiver;
 	private final Map<Square, Piece> pieces;
+	private final PieceChoiceContextFactory pieceChoiceContextFactory;
 	
-	public ChessBoard(final BoardConsolePrinter boardConsolePrinter, final MovesReceiver movesReceiver) {
+	public ChessBoard(
+			final BoardConsolePrinter boardConsolePrinter, final MovesReceiver movesReceiver, final PieceChoiceContextFactory pieceChoiceContextFactory) {
 		this.boardConsolePrinter = boardConsolePrinter;
 		this.movesReceiver = movesReceiver;
 		this.pieces = new HashMap<>();
+		this.pieceChoiceContextFactory = pieceChoiceContextFactory;
 	}
 	
 	@Override
 	public void chooseSquare(final Square square) {
-		targetFromSquareWith(square, pieces.get(square));
+		choosePiece(square, pieces.get(square));
 	}
 
-	private void targetFromSquareWith(final Square square, final Piece piece) {
+	private void choosePiece(final Square square, final Piece piece) {
 		if(piece == null)
 			return;
 		
-		piece.targetFromSquareTo(square, movesReceiver);
+		piece.choose(pieceChoiceContextFactory.createContext(square, piece, movesReceiver));
 	}
 
 	@Override

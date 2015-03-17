@@ -7,7 +7,7 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	public void choose(final PieceTargetting pieceTargetting) {
-		pieceTargetting.forward();
+	public void choose(final PieceTargeting pieceTargeting) {
+		pieceTargeting.pathForward(new TargetingCount(2), new TargetingCount(1));
 	}
 }

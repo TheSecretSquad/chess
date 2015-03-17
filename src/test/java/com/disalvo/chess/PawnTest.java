@@ -15,7 +15,7 @@ public class PawnTest {
 	@Mock
 	private MovesReceiver movesReceiver;
 	@Mock
-	private PieceTargetting pieceTargetting;
+	private PieceTargeting pieceTargeting;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -23,8 +23,10 @@ public class PawnTest {
 	}
 	
 	@Test
-	public void shouldTargetOneForwardWhenChosen() {
-		pawn.choose(pieceTargetting);
-		verify(pieceTargetting).forward();
+	public void shouldTargetTwoForwardIfNeverMovedOrOneForwardIfHasMovedWhenChosen() {
+		TargetingCount neverMovedCount = new TargetingCount(2);
+		TargetingCount hasMovedCount = new TargetingCount(1);
+		pawn.choose(pieceTargeting);
+		verify(pieceTargeting).pathForward(neverMovedCount, hasMovedCount);
 	}
 }

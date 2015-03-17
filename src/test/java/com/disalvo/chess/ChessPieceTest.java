@@ -18,13 +18,14 @@ public class ChessPieceTest {
 	@Mock
 	private MovesReceiver movesReceiver;
 	@Mock
-	private PieceTargetting pieceTargetting;
+	private PieceTargeting pieceTargeting;
 	
 	@Before
 	public void setUp() throws Exception {
 		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT) {
+
 			@Override
-			public void choose(PieceTargetting pieceTargetting) {
+			public void choose(PieceTargeting pieceTargeting) {
 				// TODO Auto-generated method stub
 				
 			}

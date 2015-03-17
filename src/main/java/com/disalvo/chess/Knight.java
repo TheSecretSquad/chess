@@ -7,7 +7,7 @@ public class Knight extends ChessPiece {
 	}
 
 	@Override
-	public void choose(PieceTargetting pieceTargetting) {
+	public void choose(PieceTargeting pieceTargeting) {
 		// TODO Auto-generated method stub
 		
 	}

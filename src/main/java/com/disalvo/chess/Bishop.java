@@ -2,12 +2,12 @@ package com.disalvo.chess;
 
 public class Bishop extends ChessPiece {
 
-	public Bishop(final Color color) {
-		super(ChessPieceType.BISHOP, color);
+	public Bishop(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
+		super(ChessPieceType.BISHOP, color, pieceTargetingFactory);
 	}
 
 	@Override
-	public void choose(PieceTargeting pieceTargeting) {
+	protected void choose(final PieceTargeting pieceTargeting) {
 		// TODO Auto-generated method stub
 		
 	}

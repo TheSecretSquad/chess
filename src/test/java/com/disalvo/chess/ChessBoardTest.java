@@ -27,14 +27,11 @@ public class ChessBoardTest {
 	@Mock
 	private MovesReceiver movesReceiver;
 	@Mock
-	private PieceChoiceContextFactory pieceTargetingFactory;
-	@Mock
 	private PieceTargeting pieceTargeting;
 	
 	@Before
 	public void setUp() throws Exception {
-		when(pieceTargetingFactory.createContext(any(Square.class), any(TargetSource.class), any(MovesReceiver.class))).thenReturn(pieceTargeting);
-		chessBoard = new ChessBoard(boardConsoleWriter, movesReceiver, pieceTargetingFactory);
+		chessBoard = new ChessBoard(boardConsoleWriter, movesReceiver);
 	}
 	
 	@Test
@@ -68,6 +65,6 @@ public class ChessBoardTest {
 	public void shouldChoosePieceAtSquareWhenSquareChosen() {
 		chessBoard.placePieceAt(piece, Square.A1);
 		chessBoard.chooseSquare(Square.A1);
-		verify(piece).choose(isA(PieceTargeting.class));
+		verify(piece).choose(Square.A1);
 	}
 }

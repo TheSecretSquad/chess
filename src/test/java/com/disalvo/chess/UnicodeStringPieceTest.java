@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class StringPieceTest {
+public class UnicodeStringPieceTest {
 
 	@Test
 	public void shouldHaveStringConversionEqualToUnicodeSymbol() {

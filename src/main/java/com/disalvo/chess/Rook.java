@@ -2,12 +2,12 @@ package com.disalvo.chess;
 
 public class Rook extends ChessPiece {
 
-	public Rook(final Color color) {
-		super(ChessPieceType.KING, color);
+	public Rook(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
+		super(ChessPieceType.KING, color, pieceTargetingFactory);
 	}
 
 	@Override
-	public void choose(PieceTargeting pieceTargeting) {
+	protected void choose(final PieceTargeting pieceTargeting) {
 		// TODO Auto-generated method stub
 		
 	}

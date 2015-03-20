@@ -9,14 +9,11 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 	private final BoardConsolePrinter boardConsolePrinter;
 	private final MovesReceiver movesReceiver;
 	private final Map<Square, Piece> pieces;
-	private final PieceChoiceContextFactory pieceChoiceContextFactory;
 	
-	public ChessBoard(
-			final BoardConsolePrinter boardConsolePrinter, final MovesReceiver movesReceiver, final PieceChoiceContextFactory pieceChoiceContextFactory) {
+	public ChessBoard(final BoardConsolePrinter boardConsolePrinter, final MovesReceiver movesReceiver) {
 		this.boardConsolePrinter = boardConsolePrinter;
 		this.movesReceiver = movesReceiver;
 		this.pieces = new HashMap<>();
-		this.pieceChoiceContextFactory = pieceChoiceContextFactory;
 	}
 	
 	@Override
@@ -28,7 +25,7 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 		if(piece == null)
 			return;
 		
-		piece.choose(pieceChoiceContextFactory.createContext(square, piece, movesReceiver));
+		piece.choose(square);
 	}
 
 	@Override

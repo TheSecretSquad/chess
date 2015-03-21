@@ -33,6 +33,12 @@ public class ChessPieceTest {
 				
 			}
 
+			@Override
+			public void move() {
+				// TODO Auto-generated method stub
+				
+			}
+
 		};
 	}
 

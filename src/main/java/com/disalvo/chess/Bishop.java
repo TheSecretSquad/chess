@@ -2,8 +2,8 @@ package com.disalvo.chess;
 
 public class Bishop extends ChessPiece {
 
-	public Bishop(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
-		super(ChessPieceType.BISHOP, color, pieceTargetingFactory);
+	public Bishop(final Color color, final ChessPieceTargetingFactory chessPieceTargetingFactory) {
+		super(ChessPieceType.BISHOP, color, chessPieceTargetingFactory);
 	}
 
 	@Override

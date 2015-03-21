@@ -15,12 +15,12 @@ public class ChessPieceFactoryTest {
 	private PieceFactory pieceFactory;
 	private Color anyColor;
 	@Mock
-	private PieceTargetingFactory pieceTargetingFactory;
+	private ChessPieceTargetingFactory chessPieceTargetingFactory;
 	
 	@Before
 	public void setUp() throws Exception {
 		anyColor = Color.LIGHT;
-		this.pieceFactory = new ChessPieceFactory(pieceTargetingFactory);
+		this.pieceFactory = new ChessPieceFactory(chessPieceTargetingFactory);
 	}
 
 	private void assertFactoryCreatesPieceType(ChessPieceType pieceType, Class<?> clazz) {

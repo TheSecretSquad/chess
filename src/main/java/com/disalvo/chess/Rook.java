@@ -2,8 +2,8 @@ package com.disalvo.chess;
 
 public class Rook extends ChessPiece {
 
-	public Rook(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
-		super(ChessPieceType.KING, color, pieceTargetingFactory);
+	public Rook(final Color color, final ChessPieceTargetingFactory chessPieceTargetingFactory) {
+		super(ChessPieceType.KING, color, chessPieceTargetingFactory);
 	}
 
 	@Override

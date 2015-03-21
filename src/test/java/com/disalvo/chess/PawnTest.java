@@ -20,11 +20,11 @@ public class PawnTest {
 	@Mock
 	private ChessPieceTargeting chessPieceTargeting;
 	@Mock
-	private PieceTargetingFactory pieceTargetingFactory;
+	private ChessPieceTargetingFactory chessPieceTargetingFactory;
 
 	@Before
 	public void setUp() throws Exception {
-		pawn = new Pawn(Color.LIGHT, pieceTargetingFactory);
+		pawn = new Pawn(Color.LIGHT, chessPieceTargetingFactory);
 	}
 
 	@Test

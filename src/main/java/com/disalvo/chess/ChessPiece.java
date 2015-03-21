@@ -4,12 +4,12 @@ public abstract class ChessPiece implements Piece {
 
 	private final ChessPieceType chessPieceType;
 	private final Color color;
-	private final PieceTargetingFactory pieceTargetingFactory;
+	private final ChessPieceTargetingFactory chessPieceTargetingFactory;
 
-	public ChessPiece(final ChessPieceType pieceType, final Color color, final PieceTargetingFactory pieceTargetingFactory) {
+	public ChessPiece(final ChessPieceType pieceType, final Color color, final ChessPieceTargetingFactory chessPieceTargetingFactory) {
 		this.chessPieceType = pieceType;
 		this.color = color;
-		this.pieceTargetingFactory = pieceTargetingFactory;
+		this.chessPieceTargetingFactory = chessPieceTargetingFactory;
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public abstract class ChessPiece implements Piece {
 
 	@Override
 	public void choose(final Square square, final MovesReceiver movesReceiver, final PieceAtSquareProvider pieceAtSquareProvider) {
-		choose(pieceTargetingFactory.create(square, this, movesReceiver));
+		choose(chessPieceTargetingFactory.create(square, this, movesReceiver));
 		
 	}
 	

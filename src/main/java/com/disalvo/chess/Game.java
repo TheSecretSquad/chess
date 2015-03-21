@@ -38,14 +38,14 @@ public class Game {
 	
 	private static Game createDefaultGame() {
 		BoardConsolePrinter boardConsolePrinter = new DefaultBoardConsolePrinter(new UnicodeStringConsole(), new DefaultReverseRankSquareProvider());
-		return new Game(new ChessBoard(boardConsolePrinter, movesReceiver()), new StandardChessConfiguration(new ChessPieceFactory(pieceTargetingFactory())));
+		return new Game(new ChessBoard(boardConsolePrinter, movesReceiver()), new StandardChessConfiguration(new ChessPieceFactory(chessPieceTargetingFactory())));
 	}
 		
 	private static MovesReceiver movesReceiver() {
 		return null;
 	}
 	
-	private static PieceTargetingFactory pieceTargetingFactory() {
+	private static ChessPieceTargetingFactory chessPieceTargetingFactory() {
 		return null;
 	}
 }

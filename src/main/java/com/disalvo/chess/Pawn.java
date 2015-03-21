@@ -5,8 +5,8 @@ public class Pawn extends ChessPiece {
 
 	private boolean hasMoved = false;
 	
-	public Pawn(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
-		super(ChessPieceType.PAWN, color, pieceTargetingFactory);
+	public Pawn(final Color color, final ChessPieceTargetingFactory chessPieceTargetingFactory) {
+		super(ChessPieceType.PAWN, color, chessPieceTargetingFactory);
 	}
 
 	@Override

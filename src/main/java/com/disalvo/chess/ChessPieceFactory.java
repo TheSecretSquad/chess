@@ -2,10 +2,10 @@ package com.disalvo.chess;
 
 public class ChessPieceFactory implements PieceFactory {
 
-	private final PieceTargetingFactory pieceTargetingFactory;
+	private final ChessPieceTargetingFactory chessPieceTargetingFactory;
 	
-	public ChessPieceFactory(final PieceTargetingFactory pieceTargetingFactory) {
-		this.pieceTargetingFactory = pieceTargetingFactory;
+	public ChessPieceFactory(final ChessPieceTargetingFactory chessPieceTargetingFactory) {
+		this.chessPieceTargetingFactory = chessPieceTargetingFactory;
 	}
 	
 	@Override
@@ -14,17 +14,17 @@ public class ChessPieceFactory implements PieceFactory {
 		
 		switch(pieceType) {
 			case BISHOP:
-				return new Bishop(color, pieceTargetingFactory);
+				return new Bishop(color, chessPieceTargetingFactory);
 			case KING:
-				return new King(color, pieceTargetingFactory);
+				return new King(color, chessPieceTargetingFactory);
 			case KNIGHT:
-				return new Knight(color, pieceTargetingFactory);
+				return new Knight(color, chessPieceTargetingFactory);
 			case PAWN:
-				return new Pawn(color, pieceTargetingFactory);
+				return new Pawn(color, chessPieceTargetingFactory);
 			case QUEEN:
-				return new Queen(color, pieceTargetingFactory);
+				return new Queen(color, chessPieceTargetingFactory);
 			case ROOK:
-				return new Rook(color, pieceTargetingFactory);
+				return new Rook(color, chessPieceTargetingFactory);
 			default:
 				throw new UnknownPieceTypeException();
 		}

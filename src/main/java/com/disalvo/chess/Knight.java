@@ -2,8 +2,8 @@ package com.disalvo.chess;
 
 public class Knight extends ChessPiece {
 
-	public Knight(final Color color, final PieceTargetingFactory pieceTargetingFactory) {
-		super(ChessPieceType.KING, color, pieceTargetingFactory);
+	public Knight(final Color color, final ChessPieceTargetingFactory chessPieceTargetingFactory) {
+		super(ChessPieceType.KING, color, chessPieceTargetingFactory);
 	}
 
 	@Override

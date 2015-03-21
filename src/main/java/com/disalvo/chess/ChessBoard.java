@@ -25,7 +25,7 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 		if(piece == null)
 			return;
 		
-		piece.choose(square);
+		piece.choose(square, movesReceiver, this);
 	}
 
 	@Override

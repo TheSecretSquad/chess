@@ -71,6 +71,8 @@ public class DefaultBoardConsolePrinterTest {
 		defaultBoardConsolePrinter.printFrom(makePieceProviderOfNoPieces());
 	}
 	
+	// Tests
+	
 	@Before
 	public void setUp() throws Exception {
 		defaultBoardConsolePrinter = new DefaultBoardConsolePrinter(console, squareProvider);

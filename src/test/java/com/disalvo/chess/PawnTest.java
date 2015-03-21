@@ -1,8 +1,6 @@
 package com.disalvo.chess;
 
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
@@ -15,10 +13,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class PawnTest {
 
 	private Pawn pawn;
+	private final TargetingCount neverMovedCount = new TargetingCount(2);
+	private final TargetingCount hasMovedCount = new TargetingCount(1);
 	@Mock
 	private MovesReceiver movesReceiver;
 	@Mock
-	private PieceTargeting pieceTargeting;
+	private ChessPieceTargeting chessPieceTargeting;
 	@Mock
 	private PieceTargetingFactory pieceTargetingFactory;
 
@@ -29,22 +29,29 @@ public class PawnTest {
 
 	@Test
 	public void shouldTargetTwoForwardIfNeverMovedWhenChosen() {
-		TargetingCount neverMovedCount = new TargetingCount(2);
-		pawn.choose(pieceTargeting);
-		verify(pieceTargeting).path(eq(RankDirection.FORWARD), eq(neverMovedCount), isA(TargetingCount.class));
+		pawn.choose(chessPieceTargeting);
+		verify(chessPieceTargeting).pathForward(neverMovedCount);
+		verify(chessPieceTargeting, never()).pathForward(hasMovedCount);
 	}
 
 	@Test
 	public void shouldTargetOneForwardIfHasMovedWhenChosen() {
 		TargetingCount hasMovedCount = new TargetingCount(1);
-		pawn.choose(pieceTargeting);
-		verify(pieceTargeting).path(eq(RankDirection.FORWARD), isA(TargetingCount.class), eq(hasMovedCount));
+		pawn.move();
+		pawn.choose(chessPieceTargeting);
+		verify(chessPieceTargeting).pathForward(hasMovedCount);
+		verify(chessPieceTargeting, never()).pathForward(neverMovedCount);
 	}
 	
 	@Test
-	public void shouldAttackOneForwardLeftWhenChosen() {
-		TargetingCount hasMovedCount = new TargetingCount(1);
-		pawn.choose(pieceTargeting);
-		verify(pieceTargeting).attack(eq(RankDirection.FORWARD), eq(FileDirection.LEFT));
+	public void shouldTargetAttackOneForwardRightWhenChosen() {
+		pawn.choose(chessPieceTargeting);
+		verify(chessPieceTargeting).attackForwardRight();
+	}
+	
+	@Test
+	public void shouldTargetAttackOneForwardLeftWhenChosen() {
+		pawn.choose(chessPieceTargeting);
+		verify(chessPieceTargeting).attackForwardLeft();
 	}
 }

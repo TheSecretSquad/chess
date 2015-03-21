@@ -1,7 +1,6 @@
 package com.disalvo.chess;
 
 import static org.mockito.AdditionalMatchers.not;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,7 +23,6 @@ public class StandardChessConfigurationTest {
 	private Piece expectedPiece;
 	@Mock
 	private Piece notExpectedPiece;
-
 	
 	@Before
 	public void setUp() throws Exception {
@@ -46,6 +44,8 @@ public class StandardChessConfigurationTest {
 			verify(board).placePieceAt(piece, s);
 		}
 	}
+	
+	// Tests
 	
 	@Test
 	public void shouldFillRank2WithLightPawnsWhenSettingUp() {

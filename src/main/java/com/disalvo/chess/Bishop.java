@@ -7,7 +7,13 @@ public class Bishop extends ChessPiece {
 	}
 
 	@Override
-	protected void choose(final PieceTargeting pieceTargeting) {
+	protected void choose(ChessPieceTargeting chessPieceTargeting) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
 		// TODO Auto-generated method stub
 		
 	}

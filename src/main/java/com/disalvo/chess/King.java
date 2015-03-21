@@ -7,7 +7,13 @@ public class King extends ChessPiece {
 	}
 
 	@Override
-	protected void choose(final PieceTargeting pieceTargeting) {
+	protected void choose(final ChessPieceTargeting chessPieceTargeting) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
 		// TODO Auto-generated method stub
 		
 	}

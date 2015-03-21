@@ -14,8 +14,6 @@ public class ChessPieceTest {
 	@Mock
 	private Console console;
 	@Mock
-	private Board board;
-	@Mock
 	private MovesReceiver movesReceiver;
 	
 	@Before
@@ -23,10 +21,18 @@ public class ChessPieceTest {
 		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT, null) {
 
 			@Override
-			protected void choose(PieceTargeting pieceTargeting) {
+			public void choose(Square square, MovesReceiver movesReceiver,
+					PieceAtSquareProvider pieceAtSquareProvider) {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			protected void choose(ChessPieceTargeting chessPieceTargeting) {
+				// TODO Auto-generated method stub
+				
+			}
+
 		};
 	}
 

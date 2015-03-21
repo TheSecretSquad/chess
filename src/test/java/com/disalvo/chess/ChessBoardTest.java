@@ -1,10 +1,10 @@
 package com.disalvo.chess;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +26,6 @@ public class ChessBoardTest {
 	private ChessConfiguration chessConfiguration;
 	@Mock
 	private MovesReceiver movesReceiver;
-	@Mock
-	private PieceTargeting pieceTargeting;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -65,6 +63,6 @@ public class ChessBoardTest {
 	public void shouldChoosePieceAtSquareWhenSquareChosen() {
 		chessBoard.placePieceAt(piece, Square.A1);
 		chessBoard.chooseSquare(Square.A1);
-		verify(piece).choose(Square.A1);
+		verify(piece).choose(eq(Square.A1), eq(movesReceiver), isA(PieceAtSquareProvider.class));
 	}
 }

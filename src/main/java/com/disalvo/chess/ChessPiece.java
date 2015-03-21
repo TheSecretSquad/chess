@@ -18,9 +18,10 @@ public abstract class ChessPiece implements Piece {
 	}
 
 	@Override
-	public final void choose(final Square square) {
-		choose(pieceTargetingFactory.create(square, color, this));
+	public void choose(final Square square, final MovesReceiver movesReceiver, final PieceAtSquareProvider pieceAtSquareProvider) {
+		choose(pieceTargetingFactory.create(square, this, movesReceiver));
+		
 	}
-
-	protected abstract void choose(final PieceTargeting pieceTargeting);
+	
+	protected abstract void choose(final ChessPieceTargeting chessPieceTargeting);
 }

@@ -7,27 +7,18 @@ import java.util.Objects;
 public class ChessBoard implements Board, PieceAtSquareProvider {
 
 	private final BoardConsolePrinter boardConsolePrinter;
-	private final MovesReceiver movesReceiver;
 	private final Map<Square, Piece> pieces;
 	
-	public ChessBoard(final BoardConsolePrinter boardConsolePrinter, final MovesReceiver movesReceiver) {
+	public ChessBoard(final BoardConsolePrinter boardConsolePrinter) {
 		this.boardConsolePrinter = boardConsolePrinter;
-		this.movesReceiver = movesReceiver;
 		this.pieces = new HashMap<>();
 	}
 	
 	@Override
-	public void chooseSquare(final Square square) {
-		choosePiece(square, pieces.get(square));
-	}
+	public void sendMovesForSquareTo(final Square square, final MovesReceiver movesReceiver) {
 
-	private void choosePiece(final Square square, final Piece piece) {
-		if(piece == null)
-			return;
-		
-		piece.choose(square, movesReceiver, this);
 	}
-
+	
 	@Override
 	public void printToConsole() {
 		boardConsolePrinter.printFrom(this);

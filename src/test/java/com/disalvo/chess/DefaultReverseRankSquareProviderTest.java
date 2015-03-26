@@ -20,20 +20,20 @@ public class DefaultReverseRankSquareProviderTest {
 	private DefaultReverseRankSquareProvider squareProvider;
 	@Mock
 	private ByRankSquareConsumer squareRankConsumer;
-	private OrderedResultsSquareRankConsumer orderedResultsSquareRankConsumer = new OrderedResultsSquareRankConsumer();
+	private ReverseByRankSquareVerifier orderedResultsSquareRankConsumer = new ReverseByRankSquareVerifier();
 	
-	private static class OrderedResultsSquareRankConsumer implements ByRankSquareConsumer {
+	private static class ReverseByRankSquareVerifier implements ByRankSquareConsumer {
 		private final List<Square> resultList = new ArrayList<>();
 
 		@Override
-		public void giveSquare(Square square) {
+		public void giveSquare(final Square square) {
 			resultList.add(square);
 		}
 
 		@Override
 		public void endRank() { /* Unused in test */}
 		
-		public void verifySquaresInOrder() {
+		public void verifyInOrder() {
 			assertEquals(resultList.get(0), Square.A8);
 			assertEquals(resultList.get(1), Square.B8);
 			assertEquals(resultList.get(7), Square.H8);
@@ -42,7 +42,7 @@ public class DefaultReverseRankSquareProviderTest {
 	};
 	
 	private void verifySquaresConsumedInOrder() {
-		orderedResultsSquareRankConsumer.verifySquaresInOrder();
+		orderedResultsSquareRankConsumer.verifyInOrder();
 	}
 	
 	@Before

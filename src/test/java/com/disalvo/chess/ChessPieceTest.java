@@ -13,31 +13,10 @@ public class ChessPieceTest {
 	private ChessPiece chessPiece;
 	@Mock
 	private Console console;
-	@Mock
-	private MovesReceiver movesReceiver;
 	
 	@Before
 	public void setUp() throws Exception {
-		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT, null) {
-
-			@Override
-			public void choose(Square square, MovesReceiver movesReceiver,
-					PieceAtSquareProvider pieceAtSquareProvider) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			protected void choose(ChessPieceTargeting chessPieceTargeting) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void move() {
-				// TODO Auto-generated method stub
-				
-			}
+		chessPiece = new ChessPiece(ChessPieceType.PAWN, Color.LIGHT) {
 
 		};
 	}

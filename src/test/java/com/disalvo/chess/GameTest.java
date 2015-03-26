@@ -17,11 +17,13 @@ public class GameTest {
 	private Board board;
 	@Mock
 	private ChessConfiguration chessConfiguration;
+	@Mock
+	private MovesReceiver movesReceiver;
 
 	@Before
 	public void setUp() throws Exception {
 		square = anySquare();
-		game = new Game(board, chessConfiguration);
+		game = new Game(board, movesReceiver, chessConfiguration);
 	}
 
 	private Square anySquare() {
@@ -29,9 +31,9 @@ public class GameTest {
 	}
 
 	@Test
-	public void shouldChooseSquareOnBoardWhenSquareIsChosen() {
+	public void shouldSendMovesWhenSquareIsChosen() {
 		game.chooseSquare(square);
-		verify(board).chooseSquare(square);
+		verify(board).sendMovesForSquareTo(square, movesReceiver);
 	}
 
 	@Test
@@ -41,16 +43,8 @@ public class GameTest {
 	}
 	
 	@Test
-	public void shouldConfigurePiecesOnTheBoardWhenStarted() {
+	public void shouldConfigureTheBoardWhenStarted() {
 		game.start();
 		verify(board).configureAs(chessConfiguration);
-	}
-	
-	@Test
-	public void shouldSubmitMoveToBoardWhenMoveSubmitted() {
-		Square from = anySquare();
-		Square to = anySquare();
-		game.submitMove(from, to);
-		verify(board).submitMove(from, to);
 	}
 }

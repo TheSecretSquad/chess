@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -14,13 +13,11 @@ public class ChessPieceFactoryTest {
 
 	private PieceFactory pieceFactory;
 	private Color anyColor;
-	@Mock
-	private ChessPieceTargetingFactory chessPieceTargetingFactory;
 	
 	@Before
 	public void setUp() throws Exception {
 		anyColor = Color.LIGHT;
-		this.pieceFactory = new ChessPieceFactory(chessPieceTargetingFactory);
+		this.pieceFactory = new ChessPieceFactory();
 	}
 
 	private void assertFactoryCreatesPieceType(ChessPieceType pieceType, Class<?> clazz) {

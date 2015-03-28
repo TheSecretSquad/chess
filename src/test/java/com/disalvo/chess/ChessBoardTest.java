@@ -1,6 +1,7 @@
 package com.disalvo.chess;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -23,6 +24,8 @@ public class ChessBoardTest {
 	private PieceAtSquareConsumer pieceConsumer;
 	@Mock
 	private ChessConfiguration chessConfiguration;
+	@Mock
+	private MovesReceiver movesReceiver;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -54,5 +57,12 @@ public class ChessBoardTest {
 	public void shouldSetupWithChessConfigurationWhenSettingUp() {
 		chessBoard.configureAs(chessConfiguration);
 		verify(chessConfiguration).setup(chessBoard);
+	}
+	
+	@Test
+	public void shouldSendMovesForPieceAtSquareWhenSendingMoves() {
+		chessBoard.placePieceAt(piece, Square.A1);
+		chessBoard.sendMovesForSquareTo(Square.A1, movesReceiver);
+		verify(piece).describeMovesTo(movesReceiver);
 	}
 }

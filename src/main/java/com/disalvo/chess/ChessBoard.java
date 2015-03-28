@@ -16,9 +16,14 @@ public class ChessBoard implements Board, PieceAtSquareProvider {
 	
 	@Override
 	public void sendMovesForSquareTo(final Square square, final MovesReceiver movesReceiver) {
-
+		describePieceMovesTo(pieces.get(square), movesReceiver);
 	}
 	
+	private void describePieceMovesTo(final Piece piece, final MovesReceiver movesReceiver) {
+		if(piece != null)
+			piece.describeMovesTo(movesReceiver);
+	}
+
 	@Override
 	public void printToConsole() {
 		boardConsolePrinter.printFrom(this);

@@ -1,6 +1,7 @@
 package com.disalvo.chess;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -12,5 +13,10 @@ public class PawnTest {
 	@Before
 	public void setUp() throws Exception {
 		pawn = new Pawn(Color.LIGHT);
+	}
+	
+	@Test
+	public void shouldTargetTwoSquaresForwardIfHasNotMovedWhenSendingMoves() {
+
 	}
 }

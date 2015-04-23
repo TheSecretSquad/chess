@@ -400,3 +400,125 @@ I'll start working on that. What is the reasoning behind this as a next step? I 
 > Well this approach will make a running piece of software, and this is the only real measure of success. :)
 
 I finally got this thing printing a chess board with a standard chess piece configuration. I added quite a bit of code which makes me a little nervous. I had a lot of trouble figuring out how to test certain aspects because I needed to test that constructors were called with the correct arguments. I couldn't figure out a good way to test constructors, so I feel like some of the interfaces and code exist to make those parts testable (specifically in relation to adding pieces to the board)... Let me know if you have any questions. I can explain my decisions in detail.
+
+I was anxious to see how piece targeting would work out so I started working on pawn targeting.
+
+I'm not sure about the interface I created for piece targeting. I thought of a few different designs, and don't know if one is better than the others.
+
+My first attempt is what I ended up staying with (for now), which you can see on github. I'm not sold on it. It only contains the methods needed for pawn right now, but I imagine when the other pieces are implemented it will look more like this:
+
+```java
+public interface ChessPieceTargeting {
+
+	// Target paths with a limit
+	void pathForward(final TargetingCount maxTargetingCount);
+	void pathBackward(final TargetingCount maxTargetingCount);
+	void pathLeft(final TargetingCount maxTargetingCount);
+	void pathRight(final TargetingCount maxTargetingCount);
+	void pathForwardLeft(final TargetingCount maxTargetingCount);
+	void pathForwardRight(final TargetingCount maxTargetingCount);
+	void pathBackwardLeft(final TargetingCount maxTargetingCount);
+	void pathBackwardRight(final TargetingCount maxTargetingCount);
+	// Target paths with no limit (go to edge of board)
+	void pathForward();
+	void pathBackward);
+	void pathLeft();
+	void pathRight();
+	void pathForwardLeft();
+	void pathForwardRight();
+	void pathBackwardLeft();
+	void pathBackwardRight();
+	// Attacks
+	void attackForwardRight();
+	void attackForwardLeft();
+	// etc.
+}
+```
+
+As you can see this interface gives the pieces very granular control over their targeting choice, but the interface gets huge. Is this as bad as I think? Most of them are overloads, and so similar than many could be implemented in terms of each other. I also don't like that the pieces have to make multiple calls on the object in order to achieve their goal.
+
+Then I had the idea to trim it down using some enum types:
+
+```java
+public enum RankDirection {
+
+	FORWARD,
+	BACKWARD;
+}
+
+public enum FileDirection {
+
+	LEFT,
+	RIGHT;
+}
+
+public interface ChessPieceTargeting {
+
+	// Allows diagonal paths with limit
+	void path(final RankDirection rankDirection, final FileDirection fileDirection,
+		final TargetingCount maxTargetingCount);
+	
+	// Allows path through ranks with limit
+	void path(final RankDirection rankDirection, final TargetingCount maxTargetingCount);
+	
+	// Allows path through files with limit
+	void path(final FileDirection fileDirection, final TargetingCount maxTargetingCount);
+	
+	// The same with no limits (go to edge of board)
+	void path(final RankDirection rankDirection, final FileDirection fileDirection);
+	void path(final RankDirection rankDirection);
+	void path(final FileDirection fileDirection);
+	
+	// Attacks
+	void attack(final RankDirection rankDirection, final FileDirection fileDirection);
+	// etc.
+}
+```
+
+This removes some of the bulk of the interface, but now has these enums passed in that are obviously going to be used with conditional logic, and to me feels like it's assuming implementation details.
+
+One question that's on my mind is: Does the number of methods in an interface matter if the methods are closely related, or should interfaces with lots of methods be viewed with suspicion?
+
+Again, with this interface the objects have to make multiple calls to create their targeting pattern.
+
+So now I'm wondering if these options are too granular and should be more direct in intent. They are chess pieces after all and this targeting interface is specifically for chess pieces.
+
+Maybe something like this would be better? It only contains the targeting patterns that are used by chess pieces?
+
+```java
+public interface ChessPieceTargeting {
+
+	// For use by the pawn
+	void pathForward(final TargetingCount maxTargetingCount);
+	
+	void attackForwardLeft();
+	
+	void attackForwardRight();
+	
+	// For use by bishop
+	void pathAttackDiagonals()
+	
+	// For use by Queen
+	void pathAttackAll()
+	
+	// etc. for the various chess specific targeting styles
+}
+```
+
+Or maybe something even more specific to chess pieces?
+
+```java
+public interface ChessPieceTargeting {
+
+	// For use by the pawn
+	void targetAsPawn(final boolean hasMoved);
+	
+	void targetAsQueen();
+	
+	void targetAsBishop();
+	
+	// etc. for the various chess specific targeting styles
+}
+```
+
+This last one seems like it offers the greatest abstraction, but it seems a little strange. Then again, it's far less likely to change than the others I presented. When I look at this I start to see how the others force the pieces to describe "how to perform targeting", where this is more "what the piece wants to do" (how vs what). The more I think about it, I'm starting to think this last one might be best.

@@ -406,7 +406,6 @@ I was anxious to see how piece targeting would work out so I started working on 
 I'm not sure about the interface I created for piece targeting. I thought of a few different designs, and don't know if one is better than the others.
 
 My first attempt is what I ended up staying with (for now), which you can see on github. I'm not sold on it. It only contains the methods needed for pawn right now, but I imagine when the other pieces are implemented it will look more like this:
-
 ```java
 public interface ChessPieceTargeting {
 
@@ -434,11 +433,9 @@ public interface ChessPieceTargeting {
 	// etc.
 }
 ```
-
 As you can see this interface gives the pieces very granular control over their targeting choice, but the interface gets huge. Is this as bad as I think? Most of them are overloads, and so similar than many could be implemented in terms of each other. I also don't like that the pieces have to make multiple calls on the object in order to achieve their goal.
 
 Then I had the idea to trim it down using some enum types:
-
 ```java
 public enum RankDirection {
 
@@ -474,7 +471,6 @@ public interface ChessPieceTargeting {
 	// etc.
 }
 ```
-
 This removes some of the bulk of the interface, but now has these enums passed in that are obviously going to be used with conditional logic, and to me feels like it's assuming implementation details.
 
 One question that's on my mind is: Does the number of methods in an interface matter if the methods are closely related, or should interfaces with lots of methods be viewed with suspicion?
@@ -484,7 +480,6 @@ Again, with this interface the objects have to make multiple calls to create the
 So now I'm wondering if these options are too granular and should be more direct in intent. They are chess pieces after all and this targeting interface is specifically for chess pieces.
 
 Maybe something like this would be better? It only contains the targeting patterns that are used by chess pieces?
-
 ```java
 public interface ChessPieceTargeting {
 
@@ -504,9 +499,7 @@ public interface ChessPieceTargeting {
 	// etc. for the various chess specific targeting styles
 }
 ```
-
 Or maybe something even more specific to chess pieces?
-
 ```java
 public interface ChessPieceTargeting {
 
@@ -520,5 +513,82 @@ public interface ChessPieceTargeting {
 	// etc. for the various chess specific targeting styles
 }
 ```
-
 This last one seems like it offers the greatest abstraction, but it seems a little strange. Then again, it's far less likely to change than the others I presented. When I look at this I start to see how the others force the pieces to describe "how to perform targeting", where this is more "what the piece wants to do" (how vs what). The more I think about it, I'm starting to think this last one might be best.
+
+> In the context of the game what role is Targeting playing?
+>
+> Is it the way that you can find out of a move is valid?
+
+A player would select a square occupied by one of his/her pieces. When the choose message is sent to the piece, Targeting is supposed to allow a chess piece to specify where it can go. Valid moves would be send to the `MovesReceiver` to be presented to the player. It's really a way to find out all of the valid moves that are available.
+
+My intent was to make Targeting an interface for chess pieces allowing them to describe their ideal movements without actually having to worry about the state of the game and board.
+
+> What you just said doesn't come across in the interface.
+>
+> Why not:
+>
+>```java
+> interface AllowableMoves {
+>   void describeMoves(MovesReceiver movesReceiver);
+>}
+>```
+> Any piece can implement this interface
+
+Are you suggesting something like this?
+
+```java
+public interface AllowableMoves {
+
+	void describeMoves(MovesReceiver movesReceiver);
+}
+
+public interface Piece extends AllowableMoves {
+	// Other Piece methods
+}
+
+public class ChessBoard {
+
+	private MovesReceiver movesReceiver;
+
+	public void chooseSquare(Square square) {
+		// ...
+		piece.describeMoves(movesReceiver);
+	}
+}
+```
+
+> YES. :)
+
+That makes sense...
+
+What about the chess pieces then? I can't figure out what messages they should send to do this?
+
+> The messages they should send to the MovesReceiver?
+
+Yes
+
+I think I need to revisit some of my previous notions about the relationship between objects and interfaces.
+
+> Interfaces define a clear role for the object to implement and help scope the role required by a method when passing an object.
+
+Thank you. I haven't heard it put like that. There's a surprising amount to learn from that one statement. I had a chance to reflect on what you said and about the project in general, and I think I've identified where my confusion is coming from. Before I get into that, I should tell you that I think the design we originally had (that you had originally suggested) is a better choice. I'm going to revert some of my recent changes and try again.
+
+The mistake I made is unconsciously associating the names of the interfaces and classes with their real life counterparts. For example, I've been comparing the `Board` interface to a real board. It was preventing me from believing that `sendMovesForTo(...)` makes sense because it doesn't make sense for a real chess board. That's why I ended up changing it to `choose(...)` on the `Board` interface. It makes sense to choose a square on a real board, but it's not the best choice for this program. I'm embarrassed, because I warned against making this exact mistake in a blog post two years ago. Software objects are not meant to be generalized, idealized versions of real objects, they are just named as such to make them familiar and easy to understand. I forgot this.
+
+There are a lot of mental hurdles to jump over with OOP.
+
+I've been working some more on trying to figure out how to implement the communication between pieces and the `MovesReceiver`. My motivation here is to design communication so the pieces don't have to ask about the state of the board. They describe the form of their movement (path or step), the direction(s), and how to deal with other pieces in the way. The `MovesReceiver` will coordinate in some way with the board to determine which of the moves meet the criteria and then have those valid moves displayed in some way.
+
+I came up with two new solutions, but I'm not confident in either of them. At this point I'm completely stuck. I can't tell if I'm making things better or worse, or if I'm just spinning endlessly somewhere in the middle. I don't know where to go from here. 
+
+You can see the first solution here: https://gist.github.com/TheSecretSquad/701cf1cd4143f5ab1458
+
+It uses a builder pattern, but I'm not sold on it because:
+1. I don't think it's East Oriented.
+2. It's a pain to test because I have to create mocks for all of the returned builders, and I have to be very careful about which mocks are returned in order to not get false positives. (You can see a sample of the tests at the bottom of the gist)
+
+The second solution is here: https://gist.github.com/TheSecretSquad/c7ce1a12615b6f1dc25c
+
+I switched the builder to use functional parameters instead. The tests are a bit better, but I'm not sold on it because:
+1. The only way to test it is to use argument captors and execute the consumers against mock objects. I don't know if this is a bad thing. It works, but should I be testing the messages of the arguments like that?
+The only alternative to this would be to create classes for each of the consumers that the pieces pass, but that would create an explosion of classes (instead of verifying using argument captors I would verify that the parameter is a certain type). (You can see a sample of the tests at the bottom of the gist)
